@@ -1,0 +1,51 @@
+/* The following is custom css that will be included with your specific apps.  Feel free to add any custom css you want included in your app. */
+
+#home-tagline {
+   	text-align: center;
+   	font-size: 22px;
+   	font-weight: bold;
+}
+#home-subtitle {
+   	text-align: center;
+   	font-size: 14px;
+}
+#home-three-images {
+   	margin: 25px -25px 25px 0;
+}
+.home-three-1 {
+   	width: 30%;
+   	height: 175px;
+   	float: left;
+   	text-align: center;
+   	margin: 0 25px 0 0;
+}
+.home-three-3 {
+   	width: 27%;
+   	height: 175px;
+   	float: right;
+   	text-align: center;
+   	margin: 0 0 0 0;
+}
+#three-columns {
+   	margin: -40px 0 20px;
+   	height: 80px;
+   	display: inline-block;
+}
+.three-columns-1 {
+   	width: 30%;
+   	height: 80px;
+   	float: left;
+   	margin: 0 25px 0 0;
+   	text-align: center;
+}
+.three-columns-3 {
+   	width: 30%;
+   	height: 80px;
+   	float: right;
+   	text-align: center;
+}
+.three-columns-title {
+   	font-size: 16px;
+   	font-weight: bold;
+   	margin: 0 0 0 5px;
+}

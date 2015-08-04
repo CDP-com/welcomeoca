@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<!-- ************************************************ -->
+<!-- START: Necessary Meta - DO NOT EDIT THIS SECTION -->
+<!-- ************************************************ -->
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+<meta http-equiv="x-ua-compatible" content="ie=Edge">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META HTTP-EQUIV="Expires" CONTENT="100">
+<meta name="robots" content="noindex,nofollow,noarchive,noodp,noimageindex,nomediaindex" />
+<!-- ************************************************ -->
+<!--                 END: Necessary Meta              -->
+<!-- ************************************************ -->
+
+
+
+
+
+<!-- ************************************************ -->
+<!-- START: Common Scripts - DO NOT EDIT THIS SECTION -->
+<!-- ************************************************ -->
+<script type="text/javascript" src="../Common/Template/common-scripts.js"></script>
+<!-- ************************************************ -->
+<!--                END: Common Scripts               -->
+<!-- ************************************************ -->
+
+
+
+
+
+<!-- ************************************************ -->
+<!--        START: App Title - Edit This Section      -->
+<!-- ************************************************ -->
+<title>Welcome to SnapBack Apps | SnapBack Apps</title>
+<!-- ************************************************ -->
+<!--                  END: App Title                  -->
+<!-- ************************************************ -->
+
+
+
+
+
+<!-- ************************************************ -->
+<!--              START: App Script Files             -->
+<!--       Add Any of Your Javascript Files Here      -->
+<!-- ************************************************ -->
+<link rel ="stylesheet" type="text/css" href="../common/css/style.css" title="style" />  
+<script type="text/javascript" src="welcomeoca.js"></script>
+<script type="text/javascript" src="welcomeocalib.js"></script>
+<!-- ************************************************ -->  
+<!--               END: App Script Files              -->
+<!-- ************************************************ -->
+
+
+
+
+
+<!-- ************************************************ -->
+<!--START: Required Scripts - DO NOT EDIT THIS SECTION-->
+<!-- ************************************************ -->
+<script type="text/javascript">
+	var menuarray = new Array();
+</script>
+<script type="text/javascript">	  
+      function getRelativeURL()
+      {
+         var relURL = "";
+         var strhref = document.location.href;
+         var array_url = strhref.split('/');
+         var arraylength = array_url.length;
+         if (arraylength > 2)
+         {
+            relURL = "../" + array_url[arraylength - 2] + "/" + array_url[arraylength - 1];
+         }
+         else
+         {
+            relURL = document.location.href;
+         }
+         
+         if (relURL.indexOf("#") > -1)
+         {
+            relURL = relURL.substring(0, relURL.indexOf("#"));
+         }
+         
+         if (relURL.indexOf("?") > -1)
+         {
+            relURL = relURL.substring(0, relURL.indexOf("?"));
+         }
+
+         return relURL;
+      }
+		
+      //var nodeURL = getUrlParts(document.location.href).search;
+		var treemenu01;
+
+		function loadTree(divid,treeName,nodeURL,jv){
+		//alert();
+		//alert ("In initTree()");
+			var str="";
+			var tmptree;
+		// divid == tree[treeName] == var name for the treemenu
+		// jsonVar == eval(treeName);
+		// nodeURL = string node url, this is the node that the tree will be opened to and focused on
+			tmptree = new cdpTree(divid,treeName,nodeURL);
+			tmptree.readScript(jv).renderTree();
+
+			tmptree.setKeyEvent(divid);
+			treemenu01=tmptree;
+			menuarray[divid]= tmptree;
+		}
+      window.onload = function(){
+         var treemenuobj = document.getElementById('treemenu01');
+         if (treemenuobj)
+         {
+            if (document.getElementById('treemenu01').visible)
+               document.getElementById('treemenu01').focus();
+         }
+      }
+</script>
+<!-- ************************************************ -->
+<!--               END: Required Scripts              -->
+<!-- ************************************************ -->
+</head>
+<body>
+
+
+
+
+
+<!-- ************************************************ -->
+<!--        START: Header - Edit ONLY App Title       -->
+<!-- ************************************************ -->
+<script type="text/javascript" src="../Common/Template/header1.js"></script>
+
+	<!-- App Title - Edit This Section -->
+		Welcome to SnapBack Apps
+			<!-- Include a Link to your App's Connect Page -->
+			<div>
+                <a id="devpage" href="http://factory.snapback-apps.com/app/snapback-home/" title="Editable Pages where users and developers work together developing and maintaing this app." style="text-decoration:none">Connect with Developers Here!</a>
+   			</div>
+			<!-- End Connect Link -->
+	<!-- End App Title -->
+
+<script type="text/javascript" src="../Common/Template/header2.js"></script>
+<!-- ************************************************ -->
+<!--                    END: Header                   -->
+<!-- ************************************************ -->
+
+
+
+
+
+<!-- ************************************************ -->
+<!--     START: Sidebar - DO NOT EDIT THIS SECTION    -->
+<!-- ************************************************ -->
+<script type="text/javascript" src="../Common/Template/sidebar1.js"></script>
+
+	<script type="text/javascript">
+		var nodeURL = getRelativeURL();
+			loadTree('treemenu01', 'menu01', nodeURL, menu01);
+	</script>
+
+<script type="text/javascript" src="../Common/Template/sidebar2.js"></script>
+<!-- ************************************************ -->
+<!--                   END: Sidebar                   -->
+<!-- ************************************************ -->
+
+
+
+
+
+<!-- ************************************************ -->
+<!--      START: Page Content - Edit this Section     -->
+<!-- ************************************************ -->
+<ul class="tabs">
+    <li><a href="#tab1" title="Run this App from Here">Home</a></li>
+    <li><a href="#tab2" title="This App is free to Use">Pricing</a></li>
+    <li><a href="#tab3" title="The technical details of what this App does">How it Works</a></li>
+    <li><a href="#tab4" title="Record of Each Committee's work and report to users">What's Certified</a></li>
+    <li><a href="#tab5" title="Here's how you can help make this App better">Improve this App</a></li>
+	<li><a href="#tab6" title="Here's how you can help the SnapBack Apps Project">SnapBack Apps Project</a></li>
+</ul>
+      				
+<div id="tab1">
+
+	<div id="main-side">
+		<strong>NEED HELP?</strong><br />
+		<a id="helpers" href="http://factory.snapback-apps.com/app/snapback-home/" title="The SnapBack Apps Home App">SnapBack Apps Home App</a><br>
+		<p>Thanks for using our App.  Join us and help by visiting our home page!</p>
+				
+		<hr />
+								
+		<p><a id="standarduser" href="#" title="This will be a Standard Link for Users to Help Develop the SnapBack Apps Project">Help us help you! Improve the SnapBack Apps Project</a></p>
+
+	</div>
+			
+    <strong>One Solution to Solve Your Technology Problems</strong>
+			<p>SnapBack is a growing collection of Apps designed to solve your technology problems quickly, easily and safely.  
+			Our Development Community is actively creating solutions available for you today and in the future.  If you would
+			like, you can even help the community find and solve new problems.</p>
+
+         <font size=16px color=blue>&#8486;&nbsp;</font><font size=16px color=red>HI! HERE IS THE LATEST NEWS - Monday, August 3, 2015  -  4:50 pm</font><font size=16px color=green>&nbsp;&#9774;</font>
+         <ul>
+            <li>NEW STRUCTURE CONVERSION: The new structure for SnapBack Apps and the platform are in this version. Please follow instructions below.</li>
+            <li>INSTRUCTIONS FOR INSTALLING AND/OR TESTING:</li>
+               <ol>
+                  <li><a id="installnews1" href="http://snapback-apps.com/oominstaller/main.html">Download the new installer for this version and save it.</a> DO NOT RUN THE INSTALLER YET.</li>
+                  <li>Uninstall your current version. MAKE SURE YOU CLICK "NO" when prompted to remove preferences and settings.</li>
+                  <li>Navigate to the installer you downloaded in step 1 and run it.</li>
+               </ol>
+            
+            <li>See RECENT CHANGES</li>
+         	<li>We are corner and stress testing the install and auto-updates</li>
+         	<li>Everyone should be testing daily and reporting any problems or rough spots our users may experience</li>
+         	<li>If you find something wrong OWN IT - make sure it gets addressed</li>
+         	<li>The <a id="licenseid" href="http://factory.snapback-apps.com/license-agreement/" title="License Agreement">License Agreement</a> Page needs to be written</li>
+         </ul>
+
+			<strong>PLEASE TEST</strong>
+			<ul>
+				<li>UPDATE CHANGES:</li>
+   				<ul style="list-style-type:circle">
+                  <li>Please test the update by right-clicking the schedule in the scheduler and selecting Run. If the schedule doesn't finish, please report it.</li>
+                  <li>The schedule is CDP-Snapback Update. It will automatically timeout after 1 hour if the job hangs for any reason.</li>
+                  <li>Now that this is working on Windows XP, test it on XP, too.</li>
+               </ul>
+				<li>Installer changes:
+					<ul style="list-style-type:circle">
+			         <li>Install over a previous install and check program entries changed.</li>
+			         <li>Uninstall and check for leftovers.</li>
+			         <li>Fresh install/uninstall (English and Spanish) and check for continuity of dialog, translation, pages, etc.</li>
+					</ul>
+				</li>
+				<li>We Need Help / Feedback on the Install Platform Process </li>  
+				<li>In fact, we would like to know about anything you like or don't like about your experience</li>    
+         </ul> 
+
+			<strong>RECENT CHANGES</strong>
+			<ul>
+			   <li>08/03/2015 - Minimized Platform will now overlay the pinned shortcut. Requires re-run of installer.</li>
+			   <li>07/30/2015 - Pinning the shortcut to the taskbar is now available when installing.</li>
+			   <li>The new structure for production is now available upon installation (running the installer) or by automatic update. The Developers App has been updated to use the new structure to generate the development environment.</li>
+				<li>New folder structure added to the install. The installer must be executed to get the new structure.
+
+         <li>Installer now puts the shortcut in the public desktop. All users will have it on their desktop when it is installed. YOU MUST RUN THE INSTALLER TO GET THIS CHANGE!!!</li>
+         <li>Infrastructure/Update/Service Changes
+            <ul style="list-style-type:circle">
+               <li>-temp\incoming job folders now get cleaned after an update</li>
+               <li>-Service does a file integrity check on startup (this will be available as a command to target any package soon)</li>
+               <li>-Bug Fix: The first update after a fresh install used to update ALL files, this should no longer be the case</li>
+            </ul>
+         </li>
+			<li>UPDATE CHANGES: The IE temporary files oom[?].js and invis[?].gif are now being removed at the end of the update. This NOW applies to Windows XP, Windows 7, and Windows 8. (See PLEASE TEST below.)</li>
+			<li>New icon trials continue! The new icon is now a multi-layer icon file to support the various versions of Windows.</li>
+            <li>Installer changes:
+               <ul style="list-style-type:circle">
+                  <li>Language support added to messages.</li>
+                  <li>Various installer pages added/modified.</li>
+                  <li>Installed product name changed from <i>Snapback Apps Platform</i> to <i>SnapBack Apps</i></li>
+               </ul>
+            </li>
+            <li>Bug in update code has been fixed so that schedule will get updated even if the update fails.</li>
+			   <li>All browsers are using php to download the installer, not HTML5.</li>
+   			<li>Version number from remote site updated if internet speed is fast enough.</li>
+   			<li>IE is not supporting the "download" attribute, so IE is only downloading snapshotsvss on first install. The rest of the apps will use snapback-apps-setup.exe if you are using IE for now.</li>
+   			<li>SnapshotsVSS app's createss.js has been switched from using powershell.</li>
+            <li>Update is now accommodating 32 bit call in order to execute the update script on 64 bit OS.</li>
+	     		<li>Clicking on an app button when not installed should allow download of installer that will take you to the app.</li>
+		    	<li>The html div with an ID that started with "ad..." has been eliminated from published apps.</li>
+            <li>If you are reading this, you should be getting your updates from the http://snapback-apps.com.</li>
+            <li>Language (English and Spanish for now) has been added to the installer.</li>
+            <li>Fixed problem with links without id's and/or without the http:// on the home page. There is a problem when either is left out.</li>
+            <li>Increased recording of current page interval for apps, so they can remember where they were last.</li>
+            <li>License agreement place holder added to the installer.</li>
+            <li>Schedules will be triggered at a quarter past the hour instead of on the hour.</li>
+         	<li>The Snapback Apps Platform now remembers what app and tab you were last on. THIS FEATURE HAS BEEN TWEAKED!!!!</li>
+				<li>New App added that allows a user to set the number os script statements so that the message "...a script on this page is slowing down your browser..." will not appear. <a href="..\maxscriptstatements\main.html"> Max Script Statements App - 7/13/2015</a> </li>
+            <li>Auto-Update Scheduling now occurs hourly. </li> 
+				<li>Latest news has been added to the home page</li>
+			</ul>
+
+			<strong>UPCOMING CHANGES</strong>
+			<ul>
+				<li>After Updates occur, we will announce on this page anything relevent to the update. Some Days there will be many builds. Some days none.</li>
+				<li>A new App for Updating Windows Defender.  For now this app will sork only for Windows 8.</li>
+				<li>Test out new <a href="..\snapshotsvss\main.html"> SnapshotsVSS APP </a> </li>
+			</ul> 
+
+                      
+			<strong>Select an app to run from the navigation outline under Featured Apps.</strong><br>						
+      				
+</div><!--End Tab1-->
+      				
+<div id="tab2">
+      
+	<p><strong>No Cost to You.</strong></p>
+	
+	<p>All SnapBack Apps are free for both business and personal use, provided that the SnapBack Platform is "hand installed", by a user and not "mass installed".    However, for some apps they may be working with or modify another application, such as Microsoft Word, which is obviously not free.  Sometimes we might independently offer that application to you with a link to a separate page.  If and when we offer you the software, we warrant that to our best ability, we've fully disclosed which products in that category are best, the least cost prices with links, along with any dissenting opinions from contributors like you. </p>
+	
+	<p>For all our users, contributors, attributable sources, and other companies, we've prepared an easy to understand page that explains all our <a id="policiesterms" href="#" >Policies, Complete Terms, and Conditions of our SnapBack Apps, Platform, website, and our SnapBack Apps Factory</a> where they are produced.  Together, this page, the FAQ, and the discussions of users, contributors, and CDP should convince you that this project is worthy of your full support.</p>
+	
+	<strong>How We Make Our Money...</strong>
+  
+</div><!--End Tab2-->
+      				
+<div id="tab3">
+			
+	<strong>Key Features of the Platform</strong>
+	<ul>
+		<li>The Collection of all SnapBack Apps built using a common layout for easy navigation and use.</li>
+		<li>All Apps provide links to facilitate communication and collaboration between developers and users.</li>
+		<li>THEMenu - A menu system that makes all your applications and SnapBack apps easy to find and use.</li>
+	</ul>
+	
+	<strong>Finding your way with the Comomon App Layout</strong><br>
+	<ul>
+		<li>In the header, on the right side is the Name of the app</li>
+		<li>Under the name is a link to the App Factory where this app is developed and maintained</li>
+		<li>To the left of the Content is a navigation outline.</li>
+		<li>to the right of the Content is the Help section where Developers communicate with you</li>
+		<li>The center Content Area has tabs with content describing the app and the buttons that initiate actions to solve your computer problems.</li>
+	</ul>
+
+	<strong>System Impacts</strong></br>
+	<ul>
+		<li>Tested on XP, Vista, Windows 7 and Windows 8. Please let us know if you find any issues.</li>
+		<li>No System Impacts</li>
+	</ul>
+			
+</div><!--End Tab3-->
+      				
+<div id="tab4">
+		
+	<p>Each Committee has signed off on their part.  For more detail of each committee’s policies and procedures, visit their home pages.</p>  
+
+	<table class="certification-table">
+		<tr>
+			<th>Certification Committee</th>
+			<th>Certification Details</th>
+		</tr>
+
+		<tr>
+			<td class="committee-name">CDP Certification</td>
+			<td>
+				<p>Released = [Date] | Version = [Version] | First Released = [Date] | Manifest Name = [Name] | By = [Author/Group]</p>
+				<p>NOTE: CDP will include any notes directed at the user here.</p>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="committee-name">Performance / System Impact</td>
+			<td>
+				<p>RAM = [Details] | DISK = [Details] | Runtime/CPU = [Details]</p>
+				<p>NOTE: the Performance/System Impact Committee will include any notes directed at the user here.</p>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="committee-name">Security/Logging/User Rights/Locations</td>
+			<td>
+				<p>
+					Security:[Details]<br /> 
+					Logging: [Details]<br />
+					Users: [Details]<br />
+					Rights required: [Details]<br />
+					Locations: [Details]<br />
+				</p>
+				<p>NOTE: the Security/Logging/User Rights/Locations Committee will include any notes directed at the user here.</p>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="committee-name">Safety/Conflicts/Compatibility/Expertise</td>
+			<td>
+				<p>Safe = [Details] | Conflicts = [Details] | Compatibility = [Details] | UserType = [Details]</p>
+				<p>NOTE: the Safety/Conflicts/Compatibility/Expertise Committee will include any notes directed at the user here.</p>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="committee-name">Legal/Attribution/Liability</td>
+			<td>
+				<p>Attributed = [Details] | DMCA Issues = [Details] | Damage = [Details]</p>
+				<p>NOTE: the Legal/Attribution/Liability Committee will include any notes directed at the user here.</p>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="committee-name">Monetization/Privacy</td>
+			<td>
+				<p>Monetization = [Details] | Privacy Issues = [Details]</p>
+				<p>NOTE: the Monetization/Privacy Committee will include any notes directed at the user here.</p>
+			</td>
+		</tr>
+	</table>
+			
+</div><!--End Tab4-->
+      
+<div id="tab5">
+			
+	<p><strong>There's a number of ways you can help with this App and users like you:</strong></p>
+
+	<h3>Tell the developers:</h3>
+	<p>Don't worry about editing our pages, they are moderated, so you don't edit the live page.</p>
+	<ul>
+		<li><a id="uicontent" href="#" title="Your App's UI & Content Page"> UI & Content</a> - Request changes in the content or look of our App by editing a moderated version of the UI and Content page.</li>
+		<li><a id="requestfeature" href="#" title="Your App's Feature Request Page"> Request a Feature</a> - Want something extra? Request it by editing a moderated version of our Feature Request page.</li>
+		<li><a id="reportbug" href="#" title="Your App's Issues and Bugs Page"> Report a Bug or Issue</a> - Find something that does not work right? Report your bug or issue by editing a moderated version of the bug reporting page.</li>
+	</ul>
+
+	<h3>We Appreciate your Help!</h3>
+	<p>This app was created with developers working in collaboration with users like you. We want your input and value your contributions for this app!</p>
+
+			
+</div><!--End Tab5-->
+		
+<div id="tab6">
+
+	<p>When software or hardware frustrates you, let us try to help:<br>
+	&nbsp;&nbsp;&nbsp;- Browse the index on the left to see if there is already a solution, since more will be added daily.<br>
+	&nbsp;&nbsp;&nbsp;- When your solution or frustration is not listed, since once we hear you, we'll quickly create those solutions.<br>
+	</p>
+
+	<h3>Tell others:</h3>
+	<p>Show how a SnapBack App is a solution to an asked question on sites like SuperUser.com.  Many sites offer written solutions that advise, if you hand-type or apply the fix.  Often, the solutions published vary in quality, method, have no error handling, and require more context and understanding than most users have. By simply referring them to that specific App's page, users on that site can simply choose to and safely apply that fix with a single click, (or first install SnapBack).  Read "best practices" and "example answers" to a posted problem, using links to a specific SnapBack App page.</p> 
+
+	<h3>Buy from us, or from our affiliate links:</h3>	
+	<p>(Note:  All sales will be done by Columbia Data Products, publisher of SnapBack Apps)</p>
+	
+	<p>We don't pepper you with ads you don't want to see, or suggest any products that our contributors don't think you need to see right then. You'll be happy if you consider our contributor's recommendations when you see them, since we guarantee the best independent advice and price, along with any of the best alternatives known.</p>
+	
+	<ul>
+		<li>Amazon Affiliate links - Anything you buy when you use this link helps us provide more solutions  [@SMadara: put affiliate link here, with graphic]</li>
+		<li>Microsoft Products -  Contact us, and we'll either provide the best prices on your needs, or advise you who has the best prices.  [Contact us HERE]</li>
+		<li>Google Apps and other Google products and services - CDP is already a dealer for Google, and we will provide you the best prices  [Contact us HERE]</li>
+	</ul>
+
+	<h3>Contribute CASH to SnapBack Apps</h3>
+	<ul>
+		<li>Amazon Payments [ need to verify link for donations ]</li>
+		<li>BitCoins (Get logo, and I will get you an address)</li>
+		<li>Cash  [provide a link or email address]</li>
+		<li>PayPal</li>
+	</ul>
+
+	<h3>Later, we will provide links to:</h3>
+	<ul>
+		<li>Like Us on Facebook: http://www.facebook.com/SnapBack_Apps (future)</li>
+		<li>Follow Us on Twitter: http://twitter.com/SnapBack_Apps (future)</li>
+		<li>Follow Us on Instagram: @SnapBack_Apps (future)</li>
+	</ul>
+	
+	<p><strong>Ensure that any pages in Wikipedia are fair and balanced</strong> that reference SnapBack Apps (later) and Columbia Data Products.</p>
+
+	<h3>Answer Questions on our CONNECT pages for this SnapBack App, or others:</h3>
+	<p><a id="connectpage" href="#" title="Your App's Connect Page">Click Here</a></p>
+
+	<h3>Become a Contributor, Writer, Manager, Helper, Graphic Design or Developer</h3>
+	<p>http://Attracting-New-Developers-to-the-Community</p> 
+
+	<h3>Thanks for Contributing!</h3>
+	<p>This app was created with developers working in collaboration with users like you. We want your input and valuable contributions towards this app! We’d like to hear ANYTHING, good or bad, that you have to say. (We will NEVER hide ANY feedback.*)  Feedback can include any improvements you wish to see in this app, suggested layout/content changes, and development enhancements. We will generally publish edited excerpts from your input.</p>
+	
+	<p><strong>The SnapBack Apps Factory is a platform where</strong> regular users interact with, or become App contributors and developers themselves.  Most technology products initially frustrates users unnecessarily.  If new versions were produced daily, users and developers were constantly communicating, products would quickly evolve to work perfectly.  SnapBack Apps' mission is to modify how any existing hardware and software interacts with ordinary users.   Our Factory connects users, contributors and developers in near real time to create or improve SnapBack Apps.  Changes that are apparently required are quickly communicated, applied and deployed to all users within hours.  Eventually, all changes that any user would ever want, are created and deployed.  The SnapBack Apps Factory platform is where contributors and users of all kinds communicate, design, and ultimately work together to accomplish this mission.</p>
+		
+</div><!--End Tab6-->
+<!-- ************************************************ -->
+<!--                 END: Page Content                -->
+<!-- ************************************************ -->
+
+
+
+
+
+<!-- ************************************************ -->
+<!--      START: Footer - DO NOT EDIT THIS SECTION    -->
+<!-- ************************************************ -->
+<script type="text/javascript" src="../Common/Template/footer.js"></script>
+<!-- ************************************************ -->
+<!--                    END: Footer                   -->
+<!-- ************************************************ -->
+
+
+
+
+
+<!-- ************************************************ -->
+<!-- START: Required Web Page Logic close of body tag -->
+<!--              DO NOT EDIT THIS SECTION            -->
+<!-- ************************************************ -->
+<script type="text/javascript">
+   /* DEVELOPER NOTE: Set number of CDP buttons for page */
+   var nCDPButtons = 0;  //Number of buttons for page.
+   /* Global array of button objects inheriting from CDPButton class */
+   var oButtonsArray = [];
+   oButtonsArray.length = nCDPButtons;  //Number of buttons for page. Array elements start with zero, so 3 buttons have elements 0 - 2.
+</script>
+<script type="text/javascript" src="../common/scripts/cdp-uri.js"></script>
+<script type="text/javascript">
+   <!--
+   // Globals used by ../common/scripts/weblpagelogic.js
+   // DEVELOPER NOTE: Developer needs to set next three values
+   var PackageName = "welcomeoca";
+   var DemoPageName = "demo.html";
+   var LivePageName = "main.html";
+   
+   var ButtonCount = oButtonsArray.length;
+   var oWPLogic;
+   /* Next initialization is the function name in welcomeocalib.js that runs when the "?run=1" parameter is included in the url */
+   var RunableFunction = "runApp()";
+   loadScript("../common/scripts/webpagelogic.js", function()
+   {
+      // Initialization code for instantiation of web page object
+      oWPLogic = new Webpage(PackageName, DemoPageName, LivePageName, ButtonCount);    //Function in ../common/scripts/webpagelogic.js
+      
+      snAppPage(oWPLogic);
+      //oWPLogic.isLocal = false;   //Uncomment this line to force online behavior
+
+      if (oWPLogic.isLocal)
+      {
+         /* No code here right now. */
+      }
+      else
+      {
+         /* Set oWPLogic properties from cdpbutton# divs */
+         fnGetAttributes(oWPLogic);
+         fnMakeCdpButtons(oWPLogic);
+      }
+   });
+   // -->
+</script>
+<!-- ********************************************** -->
+<!-- END: Required Web Page Logic close of body tag -->
+<!-- ********************************************** -->
+ 
+
+
+
+ 
+</body>
+</html> 
+
