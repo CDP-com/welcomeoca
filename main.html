@@ -203,8 +203,29 @@
 			Our Development Community is actively creating solutions available for you today and in the future.  If you would
 			like, you can even help the community find and solve new problems.</p>
 
-         <font size=16px color=blue>&#8486;&nbsp;</font><font size=16px color=red>HI! HERE IS THE LATEST NEWS - Monday, August 3, 2015  -  4:50 pm</font><font size=16px color=green>&nbsp;&#9774;</font>
+         <font size=16px color=blue>&#8486;&nbsp;</font><font size=16px color=red>HI! HERE IS THE LATEST NEWS - Tuesday, October 27, 2015  -  6:16 PM</font><font size=16px color=green>&nbsp;&#9774;</font>
          <ul>
+            <li>10/28/2015 - Adding readme.md (change log information) to manifests for each App</li>
+            <li>10/27/2015 - Modified cr.bat in snapshotsvss</li>
+            <li>10/27/2015 - Removed temporary popup from Show Snapshots VSS App</li>
+            <li>10/27/2015 - Fixed bug, icon not resizing to setting</li>
+            <li>10/26/2015 - 64 bit snapback apps.exe with auto-update testing</li>
+            <li>10/23/2015 - 64 bit snapback apps.exe with auto-update test</li>
+            <li>10/22/2015 - 64 bit snapback apps.exe now functional for going local from static site</li>
+            <li>10/21/2015 - 64 bit installer ready for testing (no auto update / install only)</li>
+            <li>10/20/2015 - Corrected pathes in SnapshotsVSS package for testing</li>
+            <li>10/19/2015 - New SnapshotsVSS package for testing</li>
+            <li>10/19/2015 - Temporary removal of SnapshotsVSS package for testing update</li>
+            <li>10/16/2015 - SnapshotsVSS package (Show Snapshots VSS) without infrastructure calls from the buttons.</li>
+            <li>10/13/2015 - New Snapback Apps.exe (DOT NET TEST). Upgraded requirement for .NET to version 3.5 in the installer.</li>
+            <li>10/2/2015 - See <a href="#recent_changes">RECENT CHANGES</a> for details.
+            <li>09/29/2015 - Service was updated to fix the XP issues</li>
+            <li>The Settings tab of the Platform has been reworked. See <a href="#recent_changes">RECENT CHANGES</a> for details.
+            <li>09/24/2015 - Test deployment</li>
+            <li>MOM Settings tab has a new option for alternatively allowing SnapBack Apps Platform to remember window coordinates and size: See <a href="#recent_changes">RECENT CHANGES</a> for details.</li>
+            <li>MOM icon right-click to delete: See <a href="#recent_changes">RECENT CHANGES</a> for details.</li>
+            <li>New Icon: See <a href="#recent_changes">RECENT CHANGES</a> for details.</li>
+            <li>New Digital Signatures: See <a href="#recent_changes">RECENT CHANGES</a> for details.</li>
             <li>NEW STRUCTURE CONVERSION: The new structure for SnapBack Apps and the platform are in this version. Please follow instructions below.</li>
             <li>INSTRUCTIONS FOR INSTALLING AND/OR TESTING:</li>
                <ol>
@@ -212,9 +233,7 @@
                   <li>Uninstall your current version. MAKE SURE YOU CLICK "NO" when prompted to remove preferences and settings.</li>
                   <li>Navigate to the installer you downloaded in step 1 and run it.</li>
                </ol>
-            
-            <li>See RECENT CHANGES</li>
-         	<li>We are corner and stress testing the install and auto-updates</li>
+           	<li>We are corner and stress testing the install and auto-updates</li>
          	<li>Everyone should be testing daily and reporting any problems or rough spots our users may experience</li>
          	<li>If you find something wrong OWN IT - make sure it gets addressed</li>
          	<li>The <a id="licenseid" href="http://factory.snapback-apps.com/license-agreement/" title="License Agreement">License Agreement</a> Page needs to be written</li>
@@ -222,6 +241,11 @@
 
 			<strong>PLEASE TEST</strong>
 			<ul>
+			   <li>UI CHANGES:</li>
+			      <ul style="list-style-type:circle">
+              <li>Settngs Tab of the Platform has been reworked. Please test that changes are being saved.</li>
+			        <li>Right-click an icon in the MOM tab to bring up a pop-up menu for immediately deleting the icon that was righ-clicked.</li>
+            </ul>
 				<li>UPDATE CHANGES:</li>
    				<ul style="list-style-type:circle">
                   <li>Please test the update by right-clicking the schedule in the scheduler and selecting Run. If the schedule doesn't finish, please report it.</li>
@@ -239,8 +263,18 @@
 				<li>In fact, we would like to know about anything you like or don't like about your experience</li>    
          </ul> 
 
-			<strong>RECENT CHANGES</strong>
+			<strong><a name="recent_changes">RECENT CHANGES</a></strong>
 			<ul>
+          <li>10/2/2015 - Fixed issues with special virtual tabs (Settings and Developer). Only one special tab can be open at a time. Some mouseover text changes.</li>
+          <li>09/28/2015 - Fixed Settings and Developer tabs to be either Settings or Developer (not both at the same time) since they share the same object.</li>
+            <li>09/28/2015 - Changed "Last Update:" to "Update:" since it represents the currently installed update.</li>
+            <li>09/28/2015 - Added code to read the publication date for the infrastructure.</li>
+            <li>09/24/2015 - Platform Settings tab now saves changes immediately. There are two exit points, the "x" on the tab and the "Close" button. On exit all dialogs should close and changes should be in effect.</li>
+			   <li>09/23/2015 - A new setting has been added to the Settings tab, "Remember window size and position upon startup"</li>
+			   <li>09/11/2015 - New right-click pop-up menu for deleting icons in the MOM tab.</li>
+			   <li>08/12/2015 - New icon trial</li>
+			   <li>08/12/2015 - New digital signature on exe's (sha256)</li>
+			   <li>08/06/2015 - Existing featured apps have been converted to a new app template</li>
 			   <li>08/03/2015 - Minimized Platform will now overlay the pinned shortcut. Requires re-run of installer.</li>
 			   <li>07/30/2015 - Pinning the shortcut to the taskbar is now available when installing.</li>
 			   <li>The new structure for production is now available upon installation (running the installer) or by automatic update. The Developers App has been updated to use the new structure to generate the development environment.</li>
