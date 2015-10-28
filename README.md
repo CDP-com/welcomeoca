@@ -9,3 +9,4 @@ Add any notes you may find pertinent
 Changelog
 ----
 Add the various changes made between versions.
+10/28/2015, mstiles, Adding readme.md (change log info) to manifest
