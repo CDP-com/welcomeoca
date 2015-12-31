@@ -61,6 +61,7 @@
 <!-- ************************************************ -->
 <script type="text/javascript">
 	var menuarray = new Array();
+   var scrolled = false;
 </script>
 <script type="text/javascript">	  
       function getRelativeURL()
@@ -111,8 +112,12 @@
 		}
       
       function pageScroll() {
-         window.scrollTo(0,top);
-         scrolldelay = setTimeout('pageScroll()', 200);
+         if ( !scrolled )
+         {
+            scrolled = true;
+            window.scrollTo(0,top);
+            scrolldelay = setTimeout('pageScroll()', 200);
+         }
       }
 
       window.onload = function(){
@@ -127,6 +132,8 @@
 <script>
     $(document).ready(function() {
         $('.menu-link').bigSlide();
+         scrolled = false;
+         setTimeout('pageScroll();', 100);
     });
 </script>
 <script type="text/javascript" src="../common/scripts/onlinecheck.js"></script>
@@ -290,55 +297,15 @@ by creating pages and modifying existing content.</p>
 		<li>Tested on XP, Vista, Windows 7 and Windows 8. Please let us know if you find any issues.
 		<li>No System Impacts
 	</ul>
-	
-	
-   <strong>Change Log</strong><br />
+   
+   <strong>SnapBack Apps Platform Changes</strong><br />
 	<div>
-	<iframe id="changelog-iframe" src="readme.txt" frameborder="0" style="z-index: 999; height: 300px; width: 100%; border: thin" seamless sandbox=""></iframe>
+	<iframe id="releasenotes-iframe" src="..\oom\release-notes.txt" frameborder="0" style="z-index: 999; height: 300px; width: 100%; border: thin" seamless sandbox=""></iframe>
 	</div>
 
    <br />	
         <font size="16" color=blue>&#8486;&nbsp;</font><font size="16" color=red>HI! HERE IS THE LATEST NEWS - Tuesday, November 10, 2015  -  1:00 PM</font><font size="16" color=green>&nbsp;&#9774;</font>
          <ul>
-            <li>11/10/2015 - main.hta's are now resizable
-            <li>11/06/2015 - Removed NPUpdater.dll from 32 bit install/update
-            <li>11/06/2015 - jleigh - Fixed 2 buges, 1) Checking for updates using the pubdate tag will no longer get messed up by IE cache! 2) The Service will now check for an internet connection before trying to update (prevents build up of Updaters/Downloaders waiting for connection)
-            <li>11/05/2015 - Redeployment of Apps with timestamps preserved.
-            <li>11/04/2015 - Auto-Update testing
-            <li>11/02/2015 - Changes in Show Snapshots VSS App: Added file createss.ps1
-            <li>10/29/2015 - Testing update lock. Corrected some errors in Show Snapshots VSS App
-            <li>10/28/2015 - Adding readme.md (change log information) to manifests for each App
-            <li>10/27/2015 - Modified cr.bat in snapshotsvss
-            <li>10/27/2015 - Removed temporary popup from Show Snapshots VSS App
-            <li>10/27/2015 - Fixed bug, icon not resizing to setting
-            <li>10/26/2015 - 64 bit snapback apps.exe with auto-update testing
-            <li>10/23/2015 - 64 bit snapback apps.exe with auto-update test
-            <li>10/22/2015 - 64 bit snapback apps.exe now functional for going local from static site
-            <li>10/21/2015 - 64 bit installer ready for testing (no auto update / install only)
-            <li>10/20/2015 - Corrected pathes in SnapshotsVSS package for testing
-            <li>10/19/2015 - New SnapshotsVSS package for testing
-            <li>10/19/2015 - Temporary removal of SnapshotsVSS package for testing update
-            <li>10/16/2015 - SnapshotsVSS package (Show Snapshots VSS) without infrastructure calls from the buttons.
-            <li>10/13/2015 - New Snapback Apps.exe (DOT NET TEST). Upgraded requirement for .NET to version 3.5 in the installer.
-            <li>10/2/2015 - See <a href="#recent_changes">RECENT CHANGES</a> for details.
-            <li>09/29/2015 - Service was updated to fix the XP issues
-            <li>The Settings tab of the Platform has been reworked. See <a href="#recent_changes">RECENT CHANGES</a> for details.
-            <li>09/24/2015 - Test deployment
-            <li>MOM Settings tab has a new option for alternatively allowing SnapBack Apps Platform to remember window coordinates and size: See <a href="#recent_changes">RECENT CHANGES</a> for details.
-            <li>MOM icon right-click to delete: See <a href="#recent_changes">RECENT CHANGES</a> for details.
-            <li>New Icon: See <a href="#recent_changes">RECENT CHANGES</a> for details.
-            <li>New Digital Signatures: See <a href="#recent_changes">RECENT CHANGES</a> for details.
-            <li>NEW STRUCTURE CONVERSION: The new structure for SnapBack Apps and the platform are in this version. Please follow instructions below.
-            <li>INSTRUCTIONS FOR INSTALLING AND/OR TESTING:
-               <ol>
-                  <li><a id="installnews1" href="http://snapback-apps.com/oominstaller/main.html">Download the new installer for this version and save it.</a> DO NOT RUN THE INSTALLER YET.
-                  <li>Uninstall your current version. MAKE SURE YOU CLICK "NO" when prompted to remove preferences and settings.
-                  <li>Navigate to the installer you downloaded in step 1 and run it.
-               </ol>
-           	<li>We are corner and stress testing the install and auto-updates
-         	<li>Everyone should be testing daily and reporting any problems or rough spots our users may experience
-         	<li>If you find something wrong OWN IT - make sure it gets addressed
-         	<li>The <a id="licenseid" href="http://factory.snapback-apps.com/license-agreement/" title="License Agreement">License Agreement</a> Page needs to be written
          </ul>
 
 			<strong>PLEASE TEST</strong>
@@ -426,6 +393,12 @@ by creating pages and modifying existing content.</p>
 				<li>Test out new <a href="../snapshotsvss/main.html"> SnapshotsVSS APP </a> 
 			</ul> 
 
+	
+   <strong>App Change Log</strong><br />
+	<div>
+	<iframe id="changelog-iframe" src="readme.txt" frameborder="0" style="z-index: 999; height: 300px; width: 100%; border: thin" seamless sandbox=""></iframe>
+	</div>
+   <br />
 			
 </div><!--End Tab2-->
 
