@@ -48,6 +48,7 @@
 <link rel ="stylesheet" type="text/css" media="all" href="custom-style.css" />  
 <script type="text/javascript" src="welcomeoca.js"></script>
 <script type="text/javascript" src="welcomeocalib.js"></script>
+<link rel="stylesheet" href="flexslider.css" type="text/css" media="screen" />
 <!-- ************************************************ -->  
 <!--               END: App Script Files              -->
 <!-- ************************************************ -->
@@ -200,78 +201,144 @@
 <div id="content-container">
       				
 <div id="tab1">
-			
-    <strong>One Solution to Solve Your Technology Problems</strong>
-			<p>SnapBack is a growing collection of Apps designed to solve your technology problems quickly, easily and safely.  
-			Our Development Community is actively creating solutions available for you today and in the future.  If you would
-			like, you can even help the community find and solve new problems.</p>
 
- <strong>SnapBack Apps Vision</strong>
+<div class="slider">
+    <div id="slider" class="flexslider" >
+          <ul class="slides">
+            <li><span class="flexslider-text"><h3>One Solution to Solve Your Technology Problems</h3><p>SnapBack is a growing collection of Apps designed to solve your technology problems quickly, easily and safely.  Our Development Community is actively creating solutions available for you today and in the future.  If you would like, you can even help the community find and solve new problems.</p><a class="flexslider-learnmore" href="#onesolution">Learn More</a></span><img src="slideshow-1.jpg" /></li>
+  	    	<li><span class="flexslider-text"><h3>The Vision of Technology Working for You</h3><p>SnapBack Apps provides the ability to adjust the way your computer works by designing precisely what users want. With SnapBack Apps, you can click on any one button and change literally anything you can think of: the way any application works, the way Windows or your computer looks or acts... Anything!</p><a class="flexslider-learnmore" href="#vision">Learn More</a></span><img src="slideshow-2.jpg" /></li>
+  	    	<li><span class="flexslider-text"><h3>SnapBack Apps on my Device</h3><p>At the heart of the SnapBack Apps project is the SnapBack Apps Platform. Unlike other application based programs, SnapBack Apps is unique in that you get ALL of our apps rather than having to individually select ones. This provides the ability to use any given app at any time, particularly when an app is absolutely necessary.</p><a class="flexslider-learnmore" href="#ondevice">Learn More</a></span><img src="slideshow-3.jpg" /></li>
+  	    	<li><span class="flexslider-text"><h3>The Key Features of SnapBack Apps</h3><ul><li>The platform will not impact system resources or performance.</li><li>Apps run whether or not you are connected to the internet.</li><li>All Apps are certified by CDP and the SnapBack Community experts.</li><li>The Community ensures that SnapBack will never install unwanted or unexpected software.</li></ul><a class="flexslider-learnmore" href="#features">Learn More</a></span><img src="slideshow-4.jpg" /></li>
+			<li><span class="flexslider-text"><h3>Why You Need SnapBack Apps</h3><ul><li>SnapBack is <b><i>the fastest</i></b> way to solve your problems.</li><li>SnapBack is <b><i>the safest</i></b> way to solve your problems.</li><li>SnapBack is <b><i>the easiest</i></b> way to solve your problems.</li><li>SnapBack is <b><i>the most effective</i></b> way to solve your problems.</li></ul><a class="flexslider-learnmore" href="#whyneed">Learn More</a></span><img src="slideshow-5.jpg" /></li>
+        </ul>
+    </div>
+	<div style="clear: both;"></div>
+	<div>
+		<div id="carousel" class="flexslider">
+			<ul class="slides">
+				<li><img src="slideshow-1.jpg" /></li>
+				<li><img src="slideshow-2.jpg" /></li>
+				<li><img src="slideshow-3.jpg" /></li>
+				<li><img src="slideshow-4.jpg" /></li>
+				<li><img src="slideshow-5.jpg" /></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<script defer src="jquery.flexslider.js"></script>
+<!-- Options for Slider -->
+<script type="text/javascript">
+$(function(){
+  SyntaxHighlighter.all();
+});
+$(window).load(function(){
+  $('#carousel').flexslider({
+	animation: "slide",
+	controlNav: false,
+	animationLoop: false,
+	slideshow: false,
+	itemWidth: 118,
+	itemMargin: 5,
+	asNavFor: '#slider'
+  });
+
+  $('#slider').flexslider({
+	animation: "slide",
+	controlNav: false,
+	animationLoop: true,
+	slideshow: true,
+	sync: "#carousel",
+	start: function(slider){
+	  $('body').removeClass('loading');
+	}
+  });
+});
+</script>
+<!-- Syntax Highlighter -->
+<script type="text/javascript" src="flexslidercore.js"></script>
+
+<div style="clear: both;"></div>
+
+<div class="homeapp-categories">
+	<div class="homeapp-categories-single">
+		<a id="homeapp-category-1" href="#" style="background:url('homeapp-category-1.jpg') no-repeat;">
+			<span>Data Protection</span>
+		</a>
+		<div class="homeapp-categories-description">
+			Keep Your Data and Computer Safe, Secure, and Backed-up
+			<a href="#">View Apps</a>
+		</div>
+	</div>
+	<div class="homeapp-categories-single">
+		<a id="homeapp-category-2" href="#" style="background:url('homeapp-category-2.jpg') no-repeat;">
+			<span>System Updates</span>
+		</a>
+		<div class="homeapp-categories-description">
+			Keep Your Programs Up-to-Date But on Your Own Schedule
+			<a href="#">View Apps</a>
+		</div>
+	</div>
+	<div class="homeapp-categories-last">
+		<a id="homeapp-category-3" href="#" style="background:url('homeapp-category-3.jpg') no-repeat;">
+			<span>New PC Setup</span>
+		</a>
+		<div class="homeapp-categories-description">
+			Install the Most Common Programs to Get Up-and-Running
+			<a href="#">View Apps</a>
+		</div>
+	</div>
+</div>
+
+<div style="clear: both;"></div>
+
+<a name="onesolution"></a><h2 class="homeapp-h2">One Solution to Solve Your Technology Problems</h2>
+<p>SnapBack is a growing collection of Apps designed to solve your technology problems quickly, easily and safely.  Our Development Community is actively creating solutions available for you today and in the future.  If you would like, you can even help the community find and solve new problems.</p>
+
+<a name="vision"></a><h2 class="homeapp-h2">The Vision of Technology Working for You</h2>
 <p>SnapBack Apps provides the ability to adjust the way your computer works by designing precisely what users want. 
 Instead of relying on what just a small group of great designers had in mind, users get to easily make changes if the 
 designs are slightly "off the mark". With SnapBack Apps, you can click on any one button and change literally anything you can think 
 of: the way any application works, the way Windows or your computer looks or acts... Anything!</p>
 
- 
-
-<strong>SnapBack Apps on my Device</strong>
+<a name="ondevice"></a><h2 class="homeapp-h2">SnapBack Apps on my Device</h2>
 <p>At the heart of the SnapBack Apps project is the SnapBack Apps Platform. Currently limited to only Windows operating systems, this platform
  houses all of our apps. Unlike other application based programs, SnapBack Apps is unique in that you get ALL of our apps rather than having 
  to individually select ones. This allows users the ability to use any given app at any time, particularly in those moments when an app is 
  absolutely necessary.</p>
 
- <p>The platform and the apps themselves are designed to be updated automatically so that you always have the most recent version. 
+<p>The platform and the apps themselves are designed to be updated automatically so that you always have the most recent version. 
  Additionally, you are free to use the apps whether your online or not, giving you the flexibility to control your machine at any given moment.</p>
 
- 
-
-<strong>SnapBack Apps on the Web</strong>
-
+<a name="onweb"></a><h2 class="homeapp-h2">SnapBack Apps on the Web</h2>
 <p>To help facilitate the best apps possible, the SnapBack Apps Factory was created. This online environment 
 is used to help users of all skill and practice levels connect with highly experienced developers so that new apps can be
  created and existing ones improved upon. The principle aim of this environment is to engage users and developers with one 
  another, so that developers have direct feedback to their products and users have the means to provide direct feedback 
  (including suggestions as to how to improve a product).</p>
 
- 
 <p>Cooperation and engagement are the backbones of the SnapBack Apps Factory. Members of the factory or even visitors  productively work 
 together to assign and accomplish tasks. Additionally, the factory is unique in that anyone (including non logged-in users) can contribute 
 by creating pages and modifying existing content.</p>
-
-                      
-			<strong>Select an app to run from the navigation outline under Featured Apps.</strong><br />
-			<br />&nbsp;<br />
 			
-	<strong>SnapBack's Key Features</strong><br />
-		<ul>
-			<li>All apps are installed with the platform and kept up-to-date.
-			<li>The platform will not impact system resources or performance.
-			<li>Apps run whether or not you are connected to the internet.
-			<li>All Apps are certified by CDP and the SnapBack Community experts.
-			<li>The My-Only-Menu system makes it quick and easy to find and run ALL your apps.
-			<li>The Community ensures that SnapBack will never install unwanted or unexpected software.
-		</ul>
-		<strong>Why you need SnapBack</strong><br />
-		<ul>
-		   <li>SnapBack is <b><i>the fastest</i></b> way to solve your problems.
-		   <li>SnapBack is <b><i>the safest</i></b> way to solve your problems.
-		   <li>SnapBack is <b><i>the easiest</i></b> way to solve your problems.
-		   <li>SnapBack is <b><i>the most effective</i></b> way to solve your problems.
-		</ul>
-
-<strong>TOP FIVE CATEGORIES OF APPs</strong>
-<ul>
-   <li>Protect My Stuff - (Use Snapshots, File History, Backup, Sync, Share, Critical Warnings - Automatically set up or use all the protections already installed)
-   <li>Keep My Internet Working - (Don't Interrupt My Internet Use - Prevent internet slowdowns or extra costs to download, update, or sync when not needed or while tethering.)
-   <ul>
-      <li>Sub-Apps - Fix connection or download speeds when there are bandwidth problems
-   </ul>
-   <li>Keep My System Updated - (Don't Interrupt My PC use - Prevent reboots, installation questions, warnings, use of internet that slows me down or costs extra.)
-   <li>Set Up My New PC  - (The Way My PC Should Already Work - Install all needed applications such as Adobe Reader, Windows Updates, and Change any settings that Most all users want.)
-   <li>Save My Time, Using My PC and Applications - (Adjust all settings in my Apps and PC so they work as they should - Make these all work the way most users want.)
-</ul>			
-      		
-<p>We are redesigning the overall look of all the app pages, as they appear in the local apps as well as on the app website (which is the same identical page).  These are screenshots.  Take a look <a id="proofs" href="http://factory.snapback-apps.com/new-app-proofs/">HERE</a>, and give us some comments about the INDIVIDUAL features, not just the overall, up, down, or ranking vote, since we will use a composite of everyone's views.</p>		
+<a name="features"></a><h2 class="homeapp-h2">SnapBack's Key Features</h2>
+	<ul>
+		<li>All apps are installed with the platform and kept up-to-date.</li>
+		<li>The platform will not impact system resources or performance.</li>
+		<li>Apps run whether or not you are connected to the internet.</li>
+		<li>All Apps are certified by CDP and the SnapBack Community experts.</li>
+		<li>The My-Only-Menu system makes it quick and easy to find and run ALL your apps.</li>
+		<li>The Community ensures that SnapBack will never install unwanted or unexpected software.</li>
+	</ul>
+	
+<a name="whyneed"></a><h2 class="homeapp-h2">Why you need SnapBack</h2>
+	<ul>
+	   <li>SnapBack is <b><i>the fastest</i></b> way to solve your problems.</li>
+	   <li>SnapBack is <b><i>the safest</i></b> way to solve your problems.</li>
+	   <li>SnapBack is <b><i>the easiest</i></b> way to solve your problems.</li>
+	   <li>SnapBack is <b><i>the most effective</i></b> way to solve your problems.</li>
+	</ul>
+	
 </div><!--End Tab1-->
      				
 <div id="tab2">
@@ -552,8 +619,8 @@ by creating pages and modifying existing content.</p>
 <!-- ********************************************** -->
  
 
-
-
+ 
+ 
  
 </body>
 </html> 
