@@ -229,9 +229,6 @@
 <script defer src="jquery.flexslider.js"></script>
 <!-- Options for Slider -->
 <script type="text/javascript">
-$(function(){
-  SyntaxHighlighter.all();
-});
 $(window).load(function(){
   $('#carousel').flexslider({
 	animation: "slide",
@@ -244,9 +241,10 @@ $(window).load(function(){
   });
 
   $('#slider').flexslider({
-	animation: "slide",
+	animation: "fade",
 	controlNav: false,
 	animationLoop: true,
+	pausePlay: true,
 	slideshow: true,
 	sync: "#carousel",
 	start: function(slider){
@@ -255,8 +253,6 @@ $(window).load(function(){
   });
 });
 </script>
-<!-- Syntax Highlighter -->
-<script type="text/javascript" src="flexslidercore.js"></script>
 
 <div style="clear: both;"></div>
 
