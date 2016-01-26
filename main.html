@@ -7,7 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
 <meta http-equiv="x-ua-compatible" content="ie=Edge" />
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE" />
-<META HTTP-EQUIV="Expires" CONTENT="100" />
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache" />
+<META HTTP-EQUIV="Expires" CONTENT="1" />
 <meta name="robots" content="noindex,nofollow,noarchive,noodp,noimageindex,nomediaindex" />
 <!-- ************************************************ -->
 <!--                 END: Necessary Meta              -->
@@ -230,6 +231,10 @@
 <!-- Options for Slider -->
 <script type="text/javascript">
 $(window).load(function(){
+	if(!window.location.hash) {
+        window.location = window.location + '#loaded';
+        window.location.reload();
+    }
   $('#carousel').flexslider({
 	animation: "slide",
 	controlNav: false,
@@ -244,13 +249,16 @@ $(window).load(function(){
 	animation: "fade",
 	controlNav: false,
 	animationLoop: true,
-	pausePlay: true,
+	pausePlay: false,
+	pauseOnAction: false,
 	slideshow: true,
 	sync: "#carousel",
 	start: function(slider){
 	  $('body').removeClass('loading');
-	}
+	},
+
   });
+  
 });
 </script>
 
