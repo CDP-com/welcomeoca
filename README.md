@@ -8,9 +8,10 @@ Add any notes you may find pertinent
 
 Changelog
 ----
-01/16/2015, smmadara, Added new content to main.html including the use of a slider and its necessary components.
+05/18/2016, smadara, Changed app so it incorporates new App Template, Heavily modified slideshow, Modified Content, Changed Layout
+01/16/2016, smadara, Added new content to main.html including the use of a slider and its necessary components.
 12/30/2015, mstiles, Added new global variable scrolled main.html
-12/11/2015, smmadara, Modified main.html to reflect new app template
+12/11/2015, smadara, Modified main.html to reflect new app template
 11/20/2015, mstiles, Removed call to scroll to top on load in main.html's
 11/20/2015, mstiles, Scroll to top onload
 11/11/2015, mstiles, change log trying iframe without borders

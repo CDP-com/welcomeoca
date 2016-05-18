@@ -1,0 +1,300 @@
+/* The following is custom css that will be included with your specific apps.  Feel free to add any custom css you want included in your app. */
+
+.homeapp-categories {
+	text-align: center;
+	border:1px solid #000;
+	padding: 15px 15px;
+	background: #f5f5f5;
+	max-width: 100%;
+	margin: 25px auto;
+}
+.homeapp-categories-single {
+	display: inline-block;
+	margin-right: 30px;
+}
+.homeapp-categories-last {
+	display: inline-block;
+	margin-right: 0px;
+}
+.homeapp-categories a {
+	border:1px solid #000;
+	width: 200px;
+	height: 120px;
+	display: block;
+	position: relative;
+}
+.homeapp-categories a span {
+	position: absolute;
+	bottom: -15%;
+	left: 6%;
+	text-align: center;
+	background: #ffffff;
+	width: 75%;
+	padding: 5px 10px;
+	border: 5px solid #cdcdcd;
+}
+.homeapp-categories-description {
+	background: #ffffff;
+	padding: 25px 25px 15px;
+	border:1px solid #000;
+	width: 150px;
+	font-size: 14px;
+}
+.homeapp-categories-description a {
+	border: 0px;
+	margin-top: 10px;
+	width: auto;
+	height: auto;
+}
+#primarycontent {
+	max-width: 100%;
+	margin: 0 auto;"
+}
+.homecontent {
+	width: 55%;
+	float: left;
+	border-right: 1px solid #000;
+	padding: 0 2%;
+}
+.homecontent hr {
+	background-color: #000;
+}
+#primarysidebar {
+	float: right;
+	width: 35%;
+	height: auto;
+}
+.homefeatured {
+	width: 100%;
+	float: right;
+	border: 1px solid #000;
+	padding: 2% 5%;
+	background-color: #363636;
+	color: #fff;
+	margin-bottom: 3%;
+}
+.homefeatured a {
+	color: #fff;
+	float: right;
+	margin-top: 1%;
+}
+.homefeatured a:hover {
+	color: #9f9f9f;
+}
+.homefeatured h3 a {
+	float: left;
+	clear: both;
+	margin-top: 1%;
+	border-bottom: 1px solid #000;
+	color: #ec5b45;
+	width: 100%;
+}
+.homefeatured h3 a:hover {
+	color: #9f9f9f;
+}
+.howcontent {
+	width: 64%;
+	float: left;
+	border-right: 1px solid #000;
+	padding: 0 2%;
+}
+.homeapp-h2{
+	text-align: center;
+	background: #ffffff;
+	width: 90%;
+	margin: 0 auto 25px;
+	padding: 5px 10px;
+	border: 5px solid #cdcdcd;
+}
+.howkey {
+	float: right;
+	width: 28%;
+	background-color: #363636;
+	color: #fff;
+	padding: 2% 1%;
+}
+.howkey h3 {
+	text-align: center;
+	border-bottom: 1px solid #ffffff;
+	margin-bottom: 5%;
+}
+.howkey ul li {
+	margin-bottom: 5%;
+}
+.howkey p {
+	padding: 0 5%;
+}
+
+
+/* Custom Slideshow Style */
+
+.slider-wrapper{
+	position:relative;
+	overflow:hidden;	
+	width:100%;	
+	height: auto;
+	margin:0 auto;
+	background:#363636;
+	border:1px solid #000;
+	box-shadow:0 3px 5px #666;
+	max-width: 100%;
+}
+
+.slider{
+	position:relative;
+	width:1000px; 
+    height:400px; 
+	margin:0 auto;
+	background:#f5f5f5;
+	overflow:hidden;
+}
+.slider p{
+	position:absolute;
+	top:-200px;
+	z-index:8000;
+	padding:1% 3%;
+}
+
+.header {
+	line-height:100%;
+	font-size: 42px;
+	background-color: #205145;
+	color:#fff;
+}
+
+.subtitle {
+	line-height:100%;
+	width: 50%;
+	font-size:20px;
+	background-color: #363636;
+	color: #ec5b45;
+}
+
+.maintext {
+	line-height: 150%;
+	width: 50%;
+	font-size:16px;
+	background-color: #363636;
+	color:#fff;
+}
+
+.sliderlink a {
+	line-height:100%;
+	font-size:24px;
+	background-color: #205145;
+	color: #ffffff;
+	padding: 5% 5%;
+	width: 100%;
+	text-align: center;
+	text-decoration: none;
+	border: 5px solid #363636;
+}
+
+.sliderlink a:hover {
+	background-color: #519383;
+}
+
+/* Innate Slideshow Style */
+
+.fraction-slider{
+	position:relative;
+	width:100%;
+	height:100%;
+	overflow:visible;
+}
+
+.fraction-slider .slide{
+	display:none;
+	width:100%;
+	height:100%;
+	position:absolute;
+	z-index:5000;
+}
+
+.fraction-slider .active-slide{
+	z-index:9999;
+}
+
+.fraction-slider .fs_obj{
+	display:block;
+	display:none;
+	position:absolute;
+	top:0px;
+	left:100%;
+	z-index:7000;
+}
+
+.fraction-slider .fs_fixed_obj{
+	z-index:6000;
+	left:0;
+}
+
+.fraction-slider .fs_obj *{
+	display:inline-block;
+	position:relative;
+	top:0px;
+	left:0px;
+}
+
+.fs_loader{
+	width:100%;
+	height:400px;
+	background:url(slide-spinner.gif) center center no-repeat transparent;
+}
+
+/* Slideshow Controls */
+
+.fraction-slider .prev,
+.fraction-slider .next{
+	display:none;
+	position:absolute;
+	width:45px;
+	height:45px;
+	z-index:9999;
+}
+
+.fraction-slider .prev{
+	left:10px;
+	top:48%;
+	background:url(slide-prevnext.png) 0px 0px no-repeat transparent;
+	
+}
+.fraction-slider .prev:hover{
+	background:url(slide-fs.prevnext.png) 0px -45px no-repeat transparent;
+}
+
+.fraction-slider .next{
+	right:10px;
+	top:48%;
+	background:url(slide-prevnext.png) -45px 0px no-repeat transparent;
+}
+.fraction-slider .next:hover{
+	background:url(slide-prevnext.png) -45px -45px no-repeat transparent;
+}
+
+.fraction-slider:hover .prev,
+.fraction-slider:hover .next{
+	display:block;
+}
+
+/* Slideshow Pager */
+
+.fs-pager-wrapper{
+	position:absolute;
+	left:10px;
+	bottom:10px;
+	z-index:9999;	
+}
+
+.fs-pager-wrapper a,
+.fs-custom-pager-wrapper a{
+	display:inline-block;
+	width:14px;
+	height:14px;
+	margin:0 5px 0 0;
+	background:url(slide-pager.png) 0px -14px no-repeat transparent;
+}
+.fs-pager-wrapper .active,
+.fs-custom-pager-wrapper .active{
+	background:url(slide-pager.png) 0px 0px no-repeat transparent;
+}

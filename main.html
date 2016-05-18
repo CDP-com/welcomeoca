@@ -5,10 +5,9 @@
 <!-- START: Necessary Meta - DO NOT EDIT THIS SECTION -->
 <!-- ************************************************ -->
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
-<meta http-equiv="x-ua-compatible" content="ie=Edge" />
-<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE" />
-<META HTTP-EQUIV="Pragma" CONTENT="no-cache" />
-<META HTTP-EQUIV="Expires" CONTENT="1" />
+<meta http-equiv="x-ua-compatible" content="ie=Edge">
+<META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<META HTTP-EQUIV="Expires" CONTENT="100">
 <meta name="robots" content="noindex,nofollow,noarchive,noodp,noimageindex,nomediaindex" />
 <!-- ************************************************ -->
 <!--                 END: Necessary Meta              -->
@@ -31,27 +30,30 @@
 
 
 <!-- ************************************************ -->
-<!--        START: App Title - Edit This Section      -->
-<!-- ************************************************ -->
-<title>Welcome to SnapBack Apps | SnapBack Apps</title>
-<!-- ************************************************ -->
-<!--                  END: App Title                  -->
-<!-- ************************************************ -->
-
-
-
-
-
-<!-- ************************************************ -->
-<!--              START: App Script Files             -->
-<!--       Add Any of Your Javascript Files Here      -->
-<!-- ************************************************ -->
-<link rel ="stylesheet" type="text/css" media="all" href="custom-style.css" />  
-<script type="text/javascript" src="welcomeoca.js"></script>
-<script type="text/javascript" src="welcomeocalib.js"></script>
-<link rel="stylesheet" href="flexslider.css" type="text/css" media="screen" />
+<!--             START: App Specific Files            -->
+<!--        Add Any of Your Custom Javascript,        --> 
+<!--   Custom CSS, and Other App Specific Files Here  -->
+<!-- ************************************************ -->  
+<link rel="stylesheet" type="text/css" media="all" href="app-style.css"/>  
+<script type="text/javascript" src="app-lib.js"></script>
+<script src="jquery.fractionslider.js" type="text/javascript" charset="utf-8"></script>
+<script src="fractionslider.js" type="text/javascript" charset="utf-8"></script>
 <!-- ************************************************ -->  
 <!--               END: App Script Files              -->
+<!-- ************************************************ -->
+
+
+
+
+
+<!-- ************************************************ -->
+<!--        START: App Title - DO NOT EDIT THIS SECTION      -->
+<!-- ************************************************ -->
+<script type="text/javascript">
+document.title = apptitle + " | SnapBack Apps";
+</script>
+<!-- ************************************************ -->
+<!--                  END: App Title                  -->
 <!-- ************************************************ -->
 
 
@@ -62,81 +64,103 @@
 <!--START: Required Scripts - DO NOT EDIT THIS SECTION-->
 <!-- ************************************************ -->
 <script type="text/javascript">
-	var menuarray = new Array();
-   var scrolled = false;
+	// Include package JS file after deployment
+	CreateAppJSFile();
 </script>
-<script type="text/javascript">	  
-      function getRelativeURL()
-      {
-         var relURL = "";
-         var strhref = document.location.href;
-         var array_url = strhref.split('/');
-         var arraylength = array_url.length;
-         if (arraylength > 2)
-         {
-            relURL = "../" + array_url[arraylength - 2] + "/" + array_url[arraylength - 1];
-         }
-         else
-         {
-            relURL = document.location.href;
-         }
-         
-         if (relURL.indexOf("#") > -1)
-         {
-            relURL = relURL.substring(0, relURL.indexOf("#"));
-         }
-         
-         if (relURL.indexOf("?") > -1)
-         {
-            relURL = relURL.substring(0, relURL.indexOf("?"));
-         }
-
-         return relURL;
-      }
-		
-      //var nodeURL = getUrlParts(document.location.href).search;
-		var treemenu01;
-
-		function loadTree(divid,treeName,nodeURL,jv){
-		//alert();
-		//alert ("In initTree()");
-			var str="";
-			var tmptree;
-		// divid == tree[treeName] == var name for the treemenu
-		// jsonVar == eval(treeName);
-		// nodeURL = string node url, this is the node that the tree will be opened to and focused on
-			tmptree = new cdpTree(divid,treeName,nodeURL);
-			tmptree.readScript(jv).renderTree();
-
-			tmptree.setKeyEvent(divid);
-			treemenu01=tmptree;
-			menuarray[divid]= tmptree;
-		}
-      
-      function pageScroll() {
-         if ( !scrolled )
-         {
-            scrolled = true;
-            window.scrollTo(0,top);
-            scrolldelay = setTimeout('pageScroll()', 200);
-         }
-      }
-
-      window.onload = function(){
-         var treemenuobj = document.getElementById('treemenu01');
-         if (treemenuobj)
-         {
-            if (document.getElementById('treemenu01').visible)
-               document.getElementById('treemenu01').focus();
-         }
-      }
-</script>
-<script>
-    $(document).ready(function() {
-        $('.menu-link').bigSlide();
-         scrolled = false;
-         setTimeout('pageScroll();', 100);
-    });
+<script type="text/javascript">
+	// Temporary Solution to Setting the Initial Permissions
+	var ManifestURL_Local = "%ALLUSERSPROFILE%\\cdp\\snapback\\apps\\apptemplate\\apptemplate.xml";
+	// Check to see if User is admin 
+	
+	// globals
+	var EnableButtonLMD=0;
+	var EnableButtonCurrent=0;
+    var curEnableButton=0;
+	var lastModDatebtn=0;
+    var defEnableBtn=0;
+	var AllowUserLMD=0;
+	var CurUserbtn="";
+	var CurrentUser=0;
+	var CautionLMD=0
+	var defcurCautionbtn=0;
+	var curCautionbtn=0;
+	var curCaution=0;
+	var defUserBtn="";
+	
+	// My Variables
+	var oTest = new ActiveXObject("wscript.shell");
+	DName = oTest.ExpandEnvironmentStrings("%COMPUTERNAME%") 
+	UName = oTest.ExpandEnvironmentStrings("%USERNAME%") 
+	var regBool=false;
+	var regNum=0;
+	var regString=null;
+	
+	// Initialize Global Permissions for Current User
+	InitializePermissions();    // needed because Install is not aware of all users and future users
+	var i=0;
+	    //Read App Registry Button Permissions 
+		curEnableButton="btn"+i+"_CurrentEnableButton"; // setup local variable name for button number	
+        var AppRoot = "HKEY_LOCAL_MACHINE\\SOFTWARE\\CDP\\SnapBack\\Apps\\";
+	    var RegPath = AppRoot + appname + "\\button" + i + "\\CurrentEnableButton";
+		//alert("for button: "+i+"   RegPath="+RegPath);
+		regBool = fnRegExists(RegPath);
+			if (regBool==false)
+			{
+				// runService to initialize registry for app 
+				// comment out for development and load your initial perms via a .reg file
+				// comment out if you have no buttons
+				runService(ManifestURL_Local,"","perms");
+			}
+			else
+			{
+				// read in data
+				//loop through number of buttons set by author
+	            for (i=0; i<btncount; i++)
+				{
+				try {
+					// this is to test to see if any enable button changes has been made 
+					EnableButtonLMD = GetButtonIniValue(appname, i, "EnableButtonLastModifiedDate");
+					lastModDatebtn="btn"+i+"_EnableButtonLastModified";
+					//setbtnValue(lastModDate,EnableButtonLMD);   // set local global value to registry entry
+					curEnableButton="btn"+i+"_CurrentEnableButton"; // setup local variable name for button number		
+					EnableButtonCurrent = GetButtonIniValue(appname,i,"CurrentEnableButton");  // Admin changed current value so get it
+					curEnableButton=eval(EnableButtonCurrent);  // set local global value to registry entry
+				} catch (e) {
+					// there is no enablebutton date so just get the value there
+					curEnableButton="btn"+i+"_CurrentEnableButton"; // setup local variable name for button number		
+					EnableButtonCurrent = GetButtonIniValue(appname,i,"CurrentEnableButton");  // Admin changed current value so get it
+					curEnableButton=eval(EnableButtonCurrent);  // set local global value to registry entry
+				}
+				try {
+					// see if admin change Normal User Flag
+					AllowUserLMD = GetButtonIniValue(appname,i,"AllowUserLastModifiedDate");
+					lastModDate="btn"+i+"_AllowUserLastModifiedDate";
+					//lastModDate,eval(AllowUserLMD);
+					currentUser= GetButtonIniValue(appname,i,"CurrentAllowUser");
+					curUserbtn="btn"+i+"_CurrentAllowUser";
+					CurUserbtn=eval(currentUser);
+				} catch (e) {
+				// Normal User has not been set by Admin  so just get allow user
+					currentUser= GetButtonIniValue(appname,i,"CurrentAllowUser");
+					curUserbtn="btn"+i+"_CurrentAllowUser";
+					CurUserbtn=eval(currentUser);
+				}
+				try {
+					// Check if admin modified caution flag for this button
+					CautionLMD = GetButtonIniValue(appname,i,"CautionLastModifiedDate");
+					lastModDate="btn"+i+"_CautionLastModifiedDate";
+					//setbtnValue(lastModDate,CautionLMD);
+					curCautionbtn="btn"+i+"_CurrentCaution";
+					curCaution= GetButtonIniValue(appname, i, "CurrentCaution"); 
+					//setbtnValue(curCautionbtn,curCaution);
+				}catch(e)
+				{
+	   				curCautionbtn="btn"+i+"_CurrentCaution";
+					curCaution= GetButtonIniValue(appname, i, "CurrentCaution"); 
+				} 
+	} // end loop through buttons
+			}
+	//DONT need to read in registry values as we get them when we need them
 </script>
 <script type="text/javascript" src="../common/scripts/onlinecheck.js"></script>
 <!-- ************************************************ -->
@@ -153,14 +177,14 @@
 <!--  START: Left Sidebar - DO NOT EDIT THIS SECTION  -->
 <!-- ************************************************ -->
 
-<script type="text/javascript" src="../common/template/sidebar1.js"></script>
+<script type="text/javascript">CreateSidebar1();</script>
 
 	<script type="text/javascript">
 		var nodeURL = getRelativeURL();
 			loadTree('treemenu01', 'menu01', nodeURL, menu01);
 	</script>
 
-<script type="text/javascript" src="../common/template/sidebar2.js"></script>
+<script type="text/javascript">CreateSidebar2();</script>
 
 <!-- ************************************************ -->
 <!--                 END: Left Sidebar                -->
@@ -171,391 +195,312 @@
 
 
 <!-- ************************************************ -->
-<!--      START: Page Content - Edit this Section     -->
+<!-- START: Page Content 1 - DO NOT EDIT THIS SECTION -->
 <!-- ************************************************ -->
-<div id="app-intro">
-	<div class="app-name">
-		Welcome to SnapBack Apps
-	</div><!--End #app-name-->
-	
-	<div class="producer-credits">
-		<img src="../common/media/default-group-icon.png" alt="Group Name"/>
-		<a id="connect" href="http://factory.snapback-apps.com/app/snapback-home/" title="Connect with the Developers of this App"><!--Include a Link to your App's Connect Page-->
-		Produced by the App Helpers Group<br />
-		Suggest / Contribute / Get Help
-		</a>
-	</div><!--End #producer-credits-->
-</div><!--End #app-intro-->
+<script type="text/javascript">CreatePageContent1();</script>
+<!-- ************************************************ -->
+<!--               END: Page Content 1                -->
+<!-- ************************************************ -->
 
-<div id="tab-container">
-	<div id="tabnav">
-		<ul class="tabs">
-			<li><a href="#tab1" title="Run this App from Here">App Home</a></li>
-			<li><a href="#tab2" title="The technical details of what this App does">How it Works</a></li>
-			<li><a href="#tab3" title="This App is free to Use">Pricing</a></li>
-			<li><a href="#tab4" title="Record of Each Committee's work and report to users">What's Certified</a></li>
-		</ul>
-		<span></span>
-	</div><!--End #tabs-->
-</div><!--End #tab-container -->
 
-<div id="content-container">
-      				
-<div id="tab1">
 
-<div class="slider">
-    <div id="slider" class="flexslider" >
-          <ul class="slides">
-            <li><span class="flexslider-text"><h3>One Solution to Solve Your Technology Problems</h3><p>SnapBack is a growing collection of Apps designed to solve your technology problems quickly, easily and safely.  Our Development Community is actively creating solutions available for you today and in the future.  If you would like, you can even help the community find and solve new problems.</p><a class="flexslider-learnmore" href="#onesolution">Learn More</a></span><img src="slideshow-1.jpg" /></li>
-  	    	<li><span class="flexslider-text"><h3>The Vision of Technology Working for You</h3><p>SnapBack Apps provides the ability to adjust the way your computer works by designing precisely what users want. With SnapBack Apps, you can click on any one button and change literally anything you can think of: the way any application works, the way Windows or your computer looks or acts... Anything!</p><a class="flexslider-learnmore" href="#vision">Learn More</a></span><img src="slideshow-2.jpg" /></li>
-  	    	<li><span class="flexslider-text"><h3>SnapBack Apps on my Device</h3><p>At the heart of the SnapBack Apps project is the SnapBack Apps Platform. Unlike other application based programs, SnapBack Apps is unique in that you get ALL of our apps rather than having to individually select ones. This provides the ability to use any given app at any time, particularly when an app is absolutely necessary.</p><a class="flexslider-learnmore" href="#ondevice">Learn More</a></span><img src="slideshow-3.jpg" /></li>
-  	    	<li><span class="flexslider-text"><h3>The Key Features of SnapBack Apps</h3><ul><li>The platform will not impact system resources or performance.</li><li>Apps run whether or not you are connected to the internet.</li><li>All Apps are certified by CDP and the SnapBack Community experts.</li><li>The Community ensures that SnapBack will never install unwanted or unexpected software.</li></ul><a class="flexslider-learnmore" href="#features">Learn More</a></span><img src="slideshow-4.jpg" /></li>
-			<li><span class="flexslider-text"><h3>Why You Need SnapBack Apps</h3><ul><li>SnapBack is <b><i>the fastest</i></b> way to solve your problems.</li><li>SnapBack is <b><i>the safest</i></b> way to solve your problems.</li><li>SnapBack is <b><i>the easiest</i></b> way to solve your problems.</li><li>SnapBack is <b><i>the most effective</i></b> way to solve your problems.</li></ul><a class="flexslider-learnmore" href="#whyneed">Learn More</a></span><img src="slideshow-5.jpg" /></li>
-        </ul>
-    </div>
-	<div style="clear: both;"></div>
-	<div>
-		<div id="carousel" class="flexslider">
-			<ul class="slides">
-				<li><img src="slideshow-1.jpg" /></li>
-				<li><img src="slideshow-2.jpg" /></li>
-				<li><img src="slideshow-3.jpg" /></li>
-				<li><img src="slideshow-4.jpg" /></li>
-				<li><img src="slideshow-5.jpg" /></li>
-			</ul>
-		</div>
-	</div>
-</div>
 
-<script defer src="jquery.flexslider.js"></script>
-<!-- Options for Slider -->
-<script type="text/javascript">
-$(window).load(function(){
-	if(!window.location.hash) {
-        window.location = window.location + '#loaded';
-        window.location.reload();
-    }
-  $('#carousel').flexslider({
-	animation: "slide",
-	controlNav: false,
-	animationLoop: false,
-	slideshow: false,
-	itemWidth: 118,
-	itemMargin: 5,
-	asNavFor: '#slider'
-  });
 
-  $('#slider').flexslider({
-	animation: "fade",
-	controlNav: false,
-	animationLoop: true,
-	pausePlay: false,
-	pauseOnAction: false,
-	slideshow: true,
-	sync: "#carousel",
-	start: function(slider){
-	  $('body').removeClass('loading');
-	},
-
-  });
-  
-});
-</script>
-
-<div style="clear: both;"></div>
-
-<div class="homeapp-categories">
-	<div class="homeapp-categories-single">
-		<a id="homeapp-category-1" href="#" style="background:url('homeapp-category-1.jpg') no-repeat;">
-			<span>Data Protection</span>
-		</a>
-		<div class="homeapp-categories-description">
-			Keep Your Data and Computer Safe, Secure, and Backed-up
-			<a href="#">View Apps</a>
-		</div>
-	</div>
-	<div class="homeapp-categories-single">
-		<a id="homeapp-category-2" href="#" style="background:url('homeapp-category-2.jpg') no-repeat;">
-			<span>System Updates</span>
-		</a>
-		<div class="homeapp-categories-description">
-			Keep Your Programs Up-to-Date But on Your Own Schedule
-			<a href="#">View Apps</a>
-		</div>
-	</div>
-	<div class="homeapp-categories-last">
-		<a id="homeapp-category-3" href="#" style="background:url('homeapp-category-3.jpg') no-repeat;">
-			<span>New PC Setup</span>
-		</a>
-		<div class="homeapp-categories-description">
-			Install the Most Common Programs to Get Up-and-Running
-			<a href="#">View Apps</a>
-		</div>
-	</div>
-</div>
-
-<div style="clear: both;"></div>
-
-<a name="onesolution"></a><h2 class="homeapp-h2">One Solution to Solve Your Technology Problems</h2>
-<p>SnapBack is a growing collection of Apps designed to solve your technology problems quickly, easily and safely.  Our Development Community is actively creating solutions available for you today and in the future.  If you would like, you can even help the community find and solve new problems.</p>
-
-<a name="vision"></a><h2 class="homeapp-h2">The Vision of Technology Working for You</h2>
-<p>SnapBack Apps provides the ability to adjust the way your computer works by designing precisely what users want. 
-Instead of relying on what just a small group of great designers had in mind, users get to easily make changes if the 
-designs are slightly "off the mark". With SnapBack Apps, you can click on any one button and change literally anything you can think 
-of: the way any application works, the way Windows or your computer looks or acts... Anything!</p>
-
-<a name="ondevice"></a><h2 class="homeapp-h2">SnapBack Apps on my Device</h2>
-<p>At the heart of the SnapBack Apps project is the SnapBack Apps Platform. Currently limited to only Windows operating systems, this platform
- houses all of our apps. Unlike other application based programs, SnapBack Apps is unique in that you get ALL of our apps rather than having 
- to individually select ones. This allows users the ability to use any given app at any time, particularly in those moments when an app is 
- absolutely necessary.</p>
-
-<p>The platform and the apps themselves are designed to be updated automatically so that you always have the most recent version. 
- Additionally, you are free to use the apps whether your online or not, giving you the flexibility to control your machine at any given moment.</p>
-
-<a name="onweb"></a><h2 class="homeapp-h2">SnapBack Apps on the Web</h2>
-<p>To help facilitate the best apps possible, the SnapBack Apps Factory was created. This online environment 
-is used to help users of all skill and practice levels connect with highly experienced developers so that new apps can be
- created and existing ones improved upon. The principle aim of this environment is to engage users and developers with one 
- another, so that developers have direct feedback to their products and users have the means to provide direct feedback 
- (including suggestions as to how to improve a product).</p>
-
-<p>Cooperation and engagement are the backbones of the SnapBack Apps Factory. Members of the factory or even visitors  productively work 
-together to assign and accomplish tasks. Additionally, the factory is unique in that anyone (including non logged-in users) can contribute 
-by creating pages and modifying existing content.</p>
-			
-<a name="features"></a><h2 class="homeapp-h2">SnapBack's Key Features</h2>
-	<ul>
-		<li>All apps are installed with the platform and kept up-to-date.</li>
-		<li>The platform will not impact system resources or performance.</li>
-		<li>Apps run whether or not you are connected to the internet.</li>
-		<li>All Apps are certified by CDP and the SnapBack Community experts.</li>
-		<li>The My-Only-Menu system makes it quick and easy to find and run ALL your apps.</li>
-		<li>The Community ensures that SnapBack will never install unwanted or unexpected software.</li>
+<!-- ************************************************ -->
+<!--     START: Page Tabs - Add More If Necessary     -->
+<!-- ************************************************ -->
+	<ul class="tabs">
+		<li><a href="#tab1" title="Run this App from Here">App Home</a></li>
+		<li><a href="#tab2" title="The technical details of what this App does">How it Works</a></li>
+		<li><a href="#tab3" title="This App is free to Use">Pricing</a></li>
 	</ul>
-	
-<a name="whyneed"></a><h2 class="homeapp-h2">Why you need SnapBack</h2>
-	<ul>
-	   <li>SnapBack is <b><i>the fastest</i></b> way to solve your problems.</li>
-	   <li>SnapBack is <b><i>the safest</i></b> way to solve your problems.</li>
-	   <li>SnapBack is <b><i>the easiest</i></b> way to solve your problems.</li>
-	   <li>SnapBack is <b><i>the most effective</i></b> way to solve your problems.</li>
-	</ul>
-	
-</div><!--End Tab1-->
-     				
-<div id="tab2">
-			
-	<strong>Key Features of the Platform</strong>
-	<ul>
-		<li>The Collection of all SnapBack Apps built using a common layout for easy navigation and use.
-		<li>All Apps provide links to facilitate communication and collaboration between developers and users.
-		<li>MyMenu - A menu system that makes all your applications and SnapBack apps easy to find and use.
-	</ul>
-	
-	<strong>Finding your way with the Comomon App Layout</strong><br />
-	<ul>
-		<li>In the header, on the right side is the Name of the app
-		<li>Under the name is a link to the App Factory where this app is developed and maintained
-		<li>To the left of the Content is a navigation outline.
-		<li>to the right of the Content is the Help section where Developers communicate with you
-		<li>The center Content Area has tabs with content describing the app and the buttons that initiate actions to solve your computer problems.
-	</ul>
+<!-- ************************************************ -->
+<!--                 END: Page Tabs                   -->
+<!-- ************************************************ -->
 
-	<strong>System Impacts</strong><br />
-	<ul>
-		<li>Tested on XP, Vista, Windows 7 and Windows 8. Please let us know if you find any issues.
-		<li>No System Impacts
-	</ul>
-   
-   <strong>SnapBack Apps Platform Changes</strong><br />
-	<div>
-	<iframe id="releasenotes-iframe" src="..\oom\release-notes.txt" frameborder="0" style="z-index: 999; height: 300px; width: 100%; border: thin" seamless sandbox=""></iframe>
-	</div>
 
-   <br />	
-        <font size="16" color=blue>&#8486;&nbsp;</font><font size="16" color=red>HI! HERE IS THE LATEST NEWS - Tuesday, November 10, 2015  -  1:00 PM</font><font size="16" color=green>&nbsp;&#9774;</font>
-         <ul>
-         </ul>
 
-			<strong>PLEASE TEST</strong>
-			<ul>
-			   <li>UI CHANGES:
-			      <ul style="list-style-type:circle">
-              <li>Settngs Tab of the Platform has been reworked. Please test that changes are being saved.
-			        <li>Right-click an icon in the MOM tab to bring up a pop-up menu for immediately deleting the icon that was righ-clicked.
-            </ul>
-				<li>UPDATE CHANGES:
-   				<ul style="list-style-type:circle">
-                  <li>Please test the update by right-clicking the schedule in the scheduler and selecting Run. If the schedule doesn't finish, please report it.
-                  <li>The schedule is CDP-Snapback Update. It will automatically timeout after 1 hour if the job hangs for any reason.
-                  <li>Now that this is working on Windows XP, test it on XP, too.
-               </ul>
-				<li>Installer changes:
-					<ul style="list-style-type:circle">
-			         <li>Install over a previous install and check program entries changed.
-			         <li>Uninstall and check for leftovers.
-			         <li>Fresh install/uninstall (English and Spanish) and check for continuity of dialog, translation, pages, etc.
-					</ul>
-				
-				<li>We Need Help / Feedback on the Install Platform Process   
-				<li>In fact, we would like to know about anything you like or don't like about your experience    
-         </ul> 
 
-			<strong><a name="recent_changes">RECENT CHANGES</a></strong>
-			<ul>
-          <li>10/2/2015 - Fixed issues with special virtual tabs (Settings and Developer). Only one special tab can be open at a time. Some mouseover text changes.
-          <li>09/28/2015 - Fixed Settings and Developer tabs to be either Settings or Developer (not both at the same time) since they share the same object.
-            <li>09/28/2015 - Changed "Last Update:" to "Update:" since it represents the currently installed update.
-            <li>09/28/2015 - Added code to read the publication date for the infrastructure.
-            <li>09/24/2015 - Platform Settings tab now saves changes immediately. There are two exit points, the "x" on the tab and the "Close" button. On exit all dialogs should close and changes should be in effect.
-			   <li>09/23/2015 - A new setting has been added to the Settings tab, "Remember window size and position upon startup"
-			   <li>09/11/2015 - New right-click pop-up menu for deleting icons in the MOM tab.
-			   <li>08/12/2015 - New icon trial
-			   <li>08/12/2015 - New digital signature on exe's (sha256)
-			   <li>08/06/2015 - Existing featured apps have been converted to a new app template
-			   <li>08/03/2015 - Minimized Platform will now overlay the pinned shortcut. Requires re-run of installer.
-			   <li>07/30/2015 - Pinning the shortcut to the taskbar is now available when installing.
-			   <li>The new structure for production is now available upon installation (running the installer) or by automatic update. The Developers App has been updated to use the new structure to generate the development environment.
-				<li>New folder structure added to the install. The installer must be executed to get the new structure.
 
-         <li>Installer now puts the shortcut in the public desktop. All users will have it on their desktop when it is installed. YOU MUST RUN THE INSTALLER TO GET THIS CHANGE!!!
-         <li>Infrastructure/Update/Service Changes
-            <ul style="list-style-type:circle">
-               <li>-temp\incoming job folders now get cleaned after an update
-               <li>-Service does a file integrity check on startup (this will be available as a command to target any package soon)
-               <li>-Bug Fix: The first update after a fresh install used to update ALL files, this should no longer be the case
-            </ul>
-         
-			<li>UPDATE CHANGES: The IE temporary files oom[?].js and invis[?].gif are now being removed at the end of the update. This NOW applies to Windows XP, Windows 7, and Windows 8. (See PLEASE TEST below.)
-			<li>New icon trials continue! The new icon is now a multi-layer icon file to support the various versions of Windows.
-            <li>Installer changes:
-               <ul style="list-style-type:circle">
-                  <li>Language support added to messages.
-                  <li>Various installer pages added/modified.
-                  <li>Installed product name changed from <i>Snapback Apps Platform</i> to <i>SnapBack Apps</i>
-               </ul>
-            
-            <li>Bug in update code has been fixed so that schedule will get updated even if the update fails.
-			   <li>All browsers are using php to download the installer, not HTML5.
-   			<li>Version number from remote site updated if internet speed is fast enough.
-   			<li>IE is not supporting the "download" attribute, so IE is only downloading snapshotsvss on first install. The rest of the apps will use snapback-apps-setup.exe if you are using IE for now.
-   			<li>SnapshotsVSS app's createss.js has been switched from using powershell.
-            <li>Update is now accommodating 32 bit call in order to execute the update script on 64 bit OS.
-	     		<li>Clicking on an app button when not installed should allow download of installer that will take you to the app.
-		    	<li>The html "div" tag with an ID that started with "ad..." has been eliminated from published apps.
-            <li>If you are reading this, you should be getting your updates from the http://snapback-apps.com.
-            <li>Language (English and Spanish for now) has been added to the installer.
-            <li>Fixed problem with links without id's and/or without the http:// on the home page. There is a problem when either is left out.
-            <li>Increased recording of current page interval for apps, so they can remember where they were last.
-            <li>License agreement place holder added to the installer.
-            <li>Schedules will be triggered at a quarter past the hour instead of on the hour.
-         	<li>The Snapback Apps Platform now remembers what app and tab you were last on. THIS FEATURE HAS BEEN TWEAKED!!!!
-				<li>New App added that allows a user to set the number os script statements so that the message "...a script on this page is slowing down your browser..." will not appear. <a href="../maxscriptstatements/main.html"> Max Script Statements App - 7/13/2015</a> 
-            <li>Auto-Update Scheduling now occurs hourly.  
-				<li>Latest news has been added to the home page
-			</ul>
+<!-- ************************************************ -->
+<!-- START: Page Content 2 - DO NOT EDIT THIS SECTION -->
+<!-- ************************************************ -->
+<script type="text/javascript">CreatePageContent2();</script>
+<!-- ************************************************ -->
+<!--               END: Page Content 2                -->
+<!-- ************************************************ -->
 
-			<strong>UPCOMING CHANGES</strong>
-			<ul>
-				<li>After Updates occur, we will announce on this page anything relevent to the update. Some Days there will be many builds. Some days none.
-				<li>A new App for Updating Windows Defender.  For now this app will sork only for Windows 8.
-				<li>Test out new <a href="../snapshotsvss/main.html"> SnapshotsVSS APP </a> 
-			</ul> 
 
-	
-   <strong>App Change Log</strong><br />
-	<div>
-	<iframe id="changelog-iframe" src="readme.txt" frameborder="0" style="z-index: 999; height: 300px; width: 100%; border: thin" seamless sandbox=""></iframe>
-	</div>
-   <br />
-			
-</div><!--End Tab2-->
 
-<div id="tab3">
-      
-	<p><strong>No Cost to You.</strong></p>
-	
-	<p>All SnapBack Apps are free for both business and personal use, provided that the SnapBack Platform is "hand installed", by a user and not "mass installed".    However, for some apps they may be working with or modify another application, such as Microsoft Word, which is obviously not free.  Sometimes we might independently offer that application to you with a link to a separate page.  If and when we offer you the software, we warrant that to our best ability, we've fully disclosed which products in that category are best, the least cost prices with links, along with any dissenting opinions from contributors like you. </p>
-	
-	<p>For all our users, contributors, attributable sources, and other companies, we've prepared an easy to understand page that explains all our <a id="policiesterms" href="#" >Policies, Complete Terms, and Conditions of our SnapBack Apps, Platform, website, and our SnapBack Apps Factory</a> where they are produced.  Together, this page, the FAQ, and the discussions of users, contributors, and CDP should convince you that this project is worthy of your full support.</p>
-	
-	<strong>How We Make Our Money...</strong>
-  
-</div><!--End Tab3-->
-      				
-<div id="tab4">
+
+
+<!-- ************************************************ -->
+<!--   START: Page Tab Content - Edit this Section    -->
+<!-- ************************************************ -->    				
+	<div id="tab1">
+
+		<div class="slider-wrapper">
+			<div class="responisve-container">
+				<div class="slider">
+					<div class="fs_loader"></div>
+					<div class="slide">
+						<img 	src="slide1-sub1.png"
+								width="361" height="354"			
+								data-position="0,-20" data-in="topRight" data-delay="200" data-out="right">
+								
+						<img 	src="slide1-main.png" 
+								data-position="20,600" data-in="bottomLeft" data-delay="500" data-out="fade">
+						
+						<p 		class="header"			
+								data-position="30,60" data-in="fade" data-step="1" data-out="top">SnapBack&#174;</p>
+														
+						<p 		class="subtitle" 	
+								data-position="100,60" data-in="left" data-step="2" data-delay="300">Control Your PCs - Easily and Safely</p>		
+						
+						<p 		class="maintext" 	
+								data-position="150,60" data-in="left" data-step="2" data-delay="2000">SnapBack is a growing collection of apps designed to solve your technology problems quickly, easily, and safely.</p>
+								
+						<p 		class="sliderlink"		
+								data-position="280,60" data-in="bottom" data-step="2" data-delay="4500" data-out="none"><a href="#snapbackmore" title="Learn More about SnapBack and How it Can Save You Time and Stress">  Learn More  </a></p>
+											
+					</div><!--End Slide 1-->
+					
+					<div class="slide">
+						
+						<img    src="slide2-sub1.png" 
+								data-position="138,0" data-in="bottomRight" data-delay="200" data-out="bottomRight">
+								
+						<img    src="slide2-sub2.png" 
+								width="1449" height="115"
+								data-position="240,200" data-in="right" data-step="2" data-easeIn="easeOutCirc">
+								
+						<img 	src="slide2-main.png" 
+								data-position="0,630" data-in="fade" data-delay="500" data-out="bottomRight">
+						
+						<p 		class="header" 			
+								data-position="30,60" data-in="top" data-step="1" data-out="top">Protect My PC</p>
+										
+						<p 		class="subtitle" 	
+								data-position="100,60" data-in="bottom" data-step="2" data-delay="500">Keep Your Data Safe, Secure, & Backed-up</p>		
+						
+						<p 		class="maintext" 	
+								data-position="150,60" data-in="bottom" data-step="2" data-delay="1500">With the Protect My PC app, you'll be able to keep your data backed-up all with the click of a single button.</p>
+						
+						<p 		class="sliderlink"		
+								data-position="280,60" data-in="bottom" data-step="2" data-delay="4500" data-out="none"><a href="../protectme/main.html" title="Go to the Protect My App">  View App  </a></p>
+								
+					</div><!--End Slide 2-->
+					
+					<div class="slide">
+						
+						<img    src="slide3-sub1.png" 
+								data-position="0,0" data-in="right" data-delay="200" data-out="bottomRight">
+								
+						<img 	src="slide3-main.png" 
+								data-position="0,630" data-in="left" data-delay="500" data-out="bottomRight">
+						
+						<p 		class="header" 			
+								data-position="30,60" data-in="top" data-step="1" data-out="top">Update My PC</p>
+										
+						<p 		class="subtitle" 	
+								data-position="100,60" data-in="bottom" data-step="2" data-delay="500">Keep Programs Up-to-Date But on Your Schedule</p>		
+						
+						<p 		class="maintext" 	
+								data-position="150,60" data-in="bottom" data-step="2" data-delay="1500">SnapBack's Update My PC app gives you full control over how and when programs get updated. Get rid of annoying prompts and create an update schedule specific to your needs.</p>
+						
+						<p 		class="sliderlink"		
+								data-position="280,60" data-in="bottom" data-step="2" data-delay="4500" data-out="none"><a href="../mypcupdate/main.html" title="Go to the Update My App">  View App  </a></p>
+								
+					</div><!--End Slide 3-->
+					
+					<div class="slide">
+						
+						<img    src="slide4-sub1.png" 
+								data-position="100,0" data-in="right" data-delay="200" data-out="bottomRight">
+								
+						<img 	src="slide4-main.png" 
+								data-position="0,600" data-in="top" data-delay="500" data-out="bottomRight">
+						
+						<p 		class="header" 			
+								data-position="30,60" data-in="top" data-step="1" data-out="top">Setup My PC</p>
+										
+						<p 		class="subtitle" 	
+								data-position="100,60" data-in="bottom" data-step="2" data-delay="500">Install Common Programs to Get Up-and-Running</p>		
+						
+						<p 		class="maintext" 	
+								data-position="150,60" data-in="bottom" data-step="2" data-delay="1500">SnapBack's Setup My PC app makes setting up a new PC a breeze.  Simply select what common programs you want to install, what changes to Windows you want to make, and click to save yourself hours of setup time.</p>
+						
+						<p 		class="sliderlink"		
+								data-position="280,60" data-in="bottom" data-step="2" data-delay="4500" data-out="none"><a href="../mypcsetup/main.html" title="Go to the Setup My App">  View App  </a></p>
+								
+					</div><!--End Slide 4-->
+					
+					<div class="slide">
+						
+						<img    src="slide5-sub1.png" 
+								data-position="0,0" data-in="bottom" data-delay="200" data-out="bottomRight">
+								
+						<img 	src="slide5-main.png" 
+								data-position="50,600" data-in="fade" data-delay="500" data-out="bottomRight">
+						
+						<p 		class="header" 			
+								data-position="30,60" data-in="top" data-step="1" data-out="top">Manage My PCs</p>
+										
+						<p 		class="subtitle" 	
+								data-position="100,60" data-in="bottom" data-step="2" data-delay="500">Easily Manage a Network of Multiple PCs</p>		
+						
+						<p 		class="maintext" 	
+								data-position="150,60" data-in="bottom" data-step="2" data-delay="1500">The Manage My PCs app allows you to comprehensively administer multiple machines from a single PC. Run apps, push jobs, and configure settings across multiple PCs all with a few clicks.</p>
+						
+						<p 		class="sliderlink"		
+								data-position="280,60" data-in="bottom" data-step="2" data-delay="4500" data-out="none"><a href="../managemypcs/main.html" title="Go to the Manage My PCs App">  View App  </a></p>
+								
+					</div><!--End Slide 5-->
+					
+				</div><!--End .slider-->
+			</div><!--End .responsive-container-->
+		</div><!--End .slider-wrapper-->
 		
-	<p>Each Committee has signed off on their part.  For more detail of each committee's policies and procedures, visit their home pages.</p>  
+		<div style="clear: both;"></div>
 
-	<table class="certification-table" summary="">
-		<tr>
-			<th>Certification Committee</th>
-			<th>Certification Details</th>
-		</tr>
-
-		<tr>
-			<td class="committee-name">CDP Certification</td>
-			<td>
-				<p>Released = [Date] | Version = [Version] | First Released = [Date] | Manifest Name = [Name] | By = [Author/Group]</p>
-				<p>NOTE: CDP will include any notes directed at the user here.</p>
-			</td>
-		</tr>
-
-		<tr>
-			<td class="committee-name">Performance / System Impact</td>
-			<td>
-				<p>RAM = [Details] | DISK = [Details] | Runtime/CPU = [Details]</p>
-				<p>NOTE: the Performance/System Impact Committee will include any notes directed at the user here.</p>
-			</td>
-		</tr>
-
-		<tr>
-			<td class="committee-name">Security/Logging/User Rights/Locations</td>
-			<td>
-				<p>
-					Security:[Details]<br /> 
-					Logging: [Details]<br />
-					Users: [Details]<br />
-					Rights required: [Details]<br />
-					Locations: [Details]<br />
-				</p>
-				<p>NOTE: the Security/Logging/User Rights/Locations Committee will include any notes directed at the user here.</p>
-			</td>
-		</tr>
-
-		<tr>
-			<td class="committee-name">Safety/Conflicts/Compatibility/Expertise</td>
-			<td>
-				<p>Safe = [Details] | Conflicts = [Details] | Compatibility = [Details] | UserType = [Details]</p>
-				<p>NOTE: the Safety/Conflicts/Compatibility/Expertise Committee will include any notes directed at the user here.</p>
-			</td>
-		</tr>
-
-		<tr>
-			<td class="committee-name">Legal/Attribution/Liability</td>
-			<td>
-				<p>Attributed = [Details] | DMCA Issues = [Details] | Damage = [Details]</p>
-				<p>NOTE: the Legal/Attribution/Liability Committee will include any notes directed at the user here.</p>
-			</td>
-		</tr>
-
-		<tr>
-			<td class="committee-name">Monetization/Privacy</td>
-			<td>
-				<p>Monetization = [Details] | Privacy Issues = [Details]</p>
-				<p>NOTE: the Monetization/Privacy Committee will include any notes directed at the user here.</p>
-			</td>
-		</tr>
-	</table>
+		<div class="homeapp-categories">
+			<div class="homeapp-categories-single">
+				<a id="homeapp-category-1" href="../protectme/main.html" style="background:url('homeapp-category-1.jpg') no-repeat;">
+					<span>Protect My PC</span>
+				</a>
+				<div class="homeapp-categories-description">
+					Keep Your Data and Computer Safe, Secure, and Backed-up
+					<a href="../protectme/main.html">View App</a>
+				</div>
+			</div>
+			<div class="homeapp-categories-single">
+				<a id="homeapp-category-2" href="../mypcupdate/main.html" style="background:url('homeapp-category-2.jpg') no-repeat;">
+					<span>Update My PC</span>
+				</a>
+				<div class="homeapp-categories-description">
+					Keep Your Programs Up-to-Date But on Your Own Schedule
+					<a href="../mypcupdate/main.html">View App</a>
+				</div>
+			</div>
+			<div class="homeapp-categories-single">
+				<a id="homeapp-category-3" href="../mypcsetup/main.html" style="background:url('homeapp-category-3.jpg') no-repeat;">
+					<span>Setup My PC</span>
+				</a>
+				<div class="homeapp-categories-description">
+					Install the Most Common Programs to Get Up-and-Running
+					<a href="../mypcsetup/main.html">View App</a>
+				</div>
+			</div>
+			<div class="homeapp-categories-last">
+				<a id="homeapp-category-3" href="../managemypcs/main.html" style="background:url('homeapp-category-4.jpg') no-repeat;">
+					<span>Manage My PCs</span>
+				</a>
+				<div class="homeapp-categories-description">
+					Easily Manage Multiple Machines from a Single PC
+					<a href="../managemypcs/main.html">View App</a>
+				</div>
+			</div>
+		</div>
+		
+		<div style="clear: both;"></div>
+		
+		<div id="primarycontent">
+		
+			<div class="homecontent">
+				<a name="snapbackmore"></a><h2>Get the Most out of Your PC</h2>
+				<p>SnapBack is a collection of individual apps that help protect and optimize your PC. By using these apps, you will gain greater control over how you use your PC. Most of the apps featured in SnapBack deal with ensuring that your machine is protected, that your software is up-to-date, and that you have control over how and when you are prompted, either by the OS itself or by the programs you regularly run.</p>
+				
+				<p>We as PC users regularly encounter issues with our machines on a daily basis. This can be as serious as technical failures and as innocuous as a program requiring our precious time with some variety of notification. In both extremes, and everything in between, we lose productivity and feel burdened by interacting with our PCs. SnapBack seeks to solve these issues in the most nonintrusive manner, allowing you to use your machine as you intend.</p>
+		
+				<hr />
+		
+				<h2>Be in Control</h2>
+				<p>The apps and fixes present in SnapBack are built with you as the user in mind. Frequently, when we come across issues that need an immediate fix, they are either too hard to scour the web for or don't adequately address our specific problems. With SnapBack, however, you get to be in charge.</p>
+				
+				<p>If an app doesn't meet your needs you can directly contact the developers and voice your concerns. If you think you can improve upon an existing app, you have the ability to work either on it or with the developers who produced it. You even have the opportunity to create an app yourself. With SnapBack, you are central to the cause.</p>
+			</div>
 			
-</div><!--End Tab4-->
+			<div id="primarysidebar">
+				<div class="homefeatured">
+					<h3><a href="../myinternet/main.html" title="Go to the Manage My Internet App">Manage My Internet</a></h3>
+					<p>Reclaim your precious bandwidth with the Manage My Internet App. Let SnapBack prevent unwanted updates when your internet conenction is shared or otherwise limited.<br /><a href="../myinternet/main.html" title="Go to the Manage My Internet App">View App</a></p>
+				</div>
+				
+				<div class="homefeatured">
+					<h3><a href="../mypcoptimize/main.html" title="Go to the Optimize My PC App">Optimize My PC</a></h3>
+					<p>Get quick fixes that will optimize your PC including ways to improve your PC's speed, reliability, and usability based upon experts' recommended enhancements.<br /><a href="../mypcoptimize/main.html" title="Go to the Optimize My PC App">View App</a></p>
+				</div>
+				
+				<div class="homefeatured">
+					<h3><a href="../snapbacknews/main.html" title="Go to SnapBack News">SnapBack News</a></h3>
+					<p>Get up-to-date information regarding recent improvements to SnapBack, newly released apps, potential threats you should be aware of, and the ways SnapBack is protecting you.<br /><a href="../snapbacknews/main.html" title="Go to SnapBack News">View News</a></p>
+				</div>
+			</div>
+	
+		</div>
+		
+		<div style="clear: both;"></div>
+			
+	</div><!--End Tab1-->
+	
+	<div id="tab2">
+		
+		<div class="howcontent">
+			<h2 class="homeapp-h2">One Solution to Solve Your Technology Problems</h2>
+			<p>SnapBack is a growing collection of Apps designed to solve your technology problems quickly, easily and safely. Our Development Community is actively creating solutions available for you today and in the future. If you would like, you can even help the community find and solve new problems.</p>
 
-</div><!--End content-container-->       
+			<h2 class="homeapp-h2">The Vision of Technology Working for You</h2>
+			<p>SnapBack provides the ability to adjust the way your computer works by designing precisely what users want. Instead of relying on what just a small group of great designers had in mind, users get to easily make changes if the designs are slightly "off the mark". With SnapBack, you can click on any one button and change literally anything you can think of: the way an application works, the way Windows or your computer looks or acts...Anything!</p>
+
+			<h2 class="homeapp-h2">SnapBack on my Device</h2>
+			<p>At the heart of the SnapBack Apps project is the SnapBack Apps Platform. Currently limited to only Windows operating systems, this platform houses all of our apps. Unlike other application based programs, SnapBack Apps is unique in that you get ALL of our apps rather than having to individually select ones. This allows users the ability to use any given app at any time, particularly in those moments when an app is absolutely necessary.</p>
+
+			<p>The platform and the apps themselves are designed to be <strong>updated automatically</strong> so that you always have the most recent version. Additionally, you are free to use the apps whether your online or not, giving you the flexibility to control your machine at any given moment.</p>
+
+			<h2 class="homeapp-h2">SnapBack on the Web</h2>
+			<p>To help facilitate the best apps possible, the SnapBack Factory was created. This online environment is used to help users of all skill and practice levels connect with highly experienced developers so that new apps can be created and existing ones improved upon. The principle aim of this environment is to engage users and developers with one  another, so that developers have direct feedback to their products and users have the means to provide direct feedback (including suggestions as to how to improve a product).</p>
+
+			<p>Cooperation and engagement are the backbones of the SnapBack Factory. Members of the factory or even visitors productively work together to assign and accomplish tasks. Additionally, the factory is unique in that anyone (including non logged-in users) can contribute by creating pages and modifying existing content.</p>
+		</div>
+		
+		<div class="howkey">		
+			<h3 >SnapBack's Key Features</h3>
+			<ul>
+				<li>All apps are installed with the platform and kept up-to-date automatically.</li>
+				<li>The platform will not impact system resources or performance.</li>
+				<li>Apps run whether or not you are connected to the internet.</li>
+				<li>All apps are certified by CDP and the SnapBack Community experts.</li>
+				<li>The built-in menu system makes it quick and easy to find and run ALL your apps.</li>
+				<li>The Community ensures that SnapBack will never install unwanted or unexpected software.</li>
+			</ul>
+		</div>
+		
+		<div class="howkey">		
+			<h3 >Certified by CDP</h3>
+			<p>SnapBack and all of its apps are certified by Columbia Data Products, Inc. (CDP). This ensures that every app is checked for its safety, security, and efficacy. With CDP's backing, you're sure to get quality enhancements and fixes without the worry of whether or not a given app is safe for you to download.</p>
+		</div>
+		
+		<div style="clear: both;"></div>
+		
+	</div><!--End Tab2-->
+	
+	<div id="tab3">
+		  
+		<!-- ********************************************************************************* -->
+		<!--                    Below is the standard app pricing information                  -->
+		<!-- Remove and include your app's individual pricing details in platin HTML if needed -->
+		<!-- ********************************************************************************* -->
+		<script type="text/javascript">CreateStandardPricing();</script>
+		
+		
+		
+	</div><!--End Tab3-->
+						
 <!-- ************************************************ -->
-<!--                 END: Page Content                -->
-<!-- ************************************************ -->
+<!--              End: Page Tab Content               -->
+<!-- ************************************************ -->   	
+
+
 
 
 
@@ -564,7 +509,7 @@ by creating pages and modifying existing content.</p>
 <!-- ************************************************ -->
 <!--      START: Footer - DO NOT EDIT THIS SECTION    -->
 <!-- ************************************************ -->
-<script type="text/javascript" src="../common/template/footer.js"></script>
+<script type="text/javascript">CreateFooter();</script>
 <!-- ************************************************ -->
 <!--                    END: Footer                   -->
 <!-- ************************************************ -->
@@ -575,35 +520,36 @@ by creating pages and modifying existing content.</p>
 
 <!-- ************************************************ -->
 <!-- START: Required Web Page Logic close of body tag -->
-<!--              DO NOT EDIT THIS SECTION            -->
+<!--             DO NOT EDIT THIS SECTION             -->
 <!-- ************************************************ -->
 <script type="text/javascript">
-   /* DEVELOPER NOTE: Set number of CDP buttons for page */
-   var nCDPButtons = 0;  //Number of buttons for page.
-   /* Global array of button objects inheriting from CDPButton class */
+   var nCDPButtons = btncount;  // Number of buttons for page set by applib.js.
+   // Global array of button objects inheriting from CDPButton class
    var oButtonsArray = [];
    oButtonsArray.length = nCDPButtons;  //Number of buttons for page. Array elements start with zero, so 3 buttons have elements 0 - 2.
 </script>
 <script type="text/javascript" src="../common/scripts/cdp-uri.js"></script>
 <script type="text/javascript">
    <!--
-   // Globals used by ../common/scripts/weblpagelogic.js
-   // DEVELOPER NOTE: Developer needs to set next three values
-   var PackageName = "welcomeoca";
-   var DemoPageName = "demo.html";
+   // Globals used by ../common/webpagelogic.js
+   var PackageName = appname;  // Package name set by applib.js
+
+	// DEVELOPER NOTE: Next value can be set, but is optional
+   var DemoPageName = "";	// Leave this blank or use an independent html file.
+   
    var LivePageName = "main.html";
    
    var ButtonCount = oButtonsArray.length;
    var oWPLogic;
-   /* Next initialization is the function name in welcomeocalib.js that runs when the "?run=1" parameter is included in the url */
-   var RunableFunction = "runApp()";
+   /* Next initialization is the function name in [packagename]lib.js that runs when the "?run=1" parameter is included in the url */
+   var RunableFunction = "runapp()";
    loadScript("../common/scripts/webpagelogic.js", function()
    {
       // Initialization code for instantiation of web page object
-      oWPLogic = new Webpage(PackageName, DemoPageName, LivePageName, ButtonCount);    //Function in ../common/scripts/webpagelogic.js
+      oWPLogic = new Webpage(PackageName, DemoPageName, LivePageName, ButtonCount);    //Function in ../common/webpagelogic.js
       
       snAppPage(oWPLogic);
-      //oWPLogic.isLocal = false;   //Uncomment this line to force online behavior
+//      oWPLogic.isLocal = false;   //Uncomment this line to force online behavior
 
       if (oWPLogic.isLocal)
       {
@@ -621,11 +567,11 @@ by creating pages and modifying existing content.</p>
 <!-- ********************************************** -->
 <!-- END: Required Web Page Logic close of body tag -->
 <!-- ********************************************** -->
- 
 
- 
- 
- 
+
+
+
+
 </body>
 </html> 
 
